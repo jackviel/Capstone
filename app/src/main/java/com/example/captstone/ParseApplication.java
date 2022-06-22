@@ -11,6 +11,7 @@ import android.app.Application;
 public class ParseApplication extends Application {
 
     // Initializes Parse SDK as soon as the application is created
+    // test
     @Override
     public void onCreate() {
         super.onCreate();
