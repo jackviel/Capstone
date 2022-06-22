@@ -11,22 +11,22 @@
 
     <EditText
         android:id="@+id/etBody"
-        android:layout_width="210dp"
-        android:layout_height="194dp"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="100dp"
+        android:layout_width="201dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="104dp"
         android:ems="10"
         android:hint="Your thoughts...."
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pbLoading" />
+        app:layout_constraintTop_toBottomOf="@+id/rvResults" />
 
     <ProgressBar
         android:id="@+id/pbLoading"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="180dp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,12 +34,29 @@
 
     <Button
         android:id="@+id/bSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
+        android:layout_width="156dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="56dp"
         android:layout_marginEnd="128dp"
         android:text="Submit Review"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etBody" />
+
+    <SearchView
+        android:id="@+id/svMedia"
+        android:layout_width="299dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pbLoading" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvResults"
+        android:layout_width="362dp"
+        android:layout_height="271dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svMedia" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

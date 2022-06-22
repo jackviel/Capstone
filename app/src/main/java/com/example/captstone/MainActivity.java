@@ -41,18 +41,15 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (menuItem.getItemId()) {
                     case R.id.action_feed:
-                        Toast.makeText(MainActivity.this, "feed", Toast.LENGTH_SHORT).show();
                         fragment = new FeedFragment();
                         break;
                     case R.id.action_compose:
-                        Toast.makeText(MainActivity.this, "compose", Toast.LENGTH_SHORT).show();
                         fragment = new ComposeFragment();
                         break;
                     case R.id.action_profile:
                         Toast.makeText(MainActivity.this, "profile", Toast.LENGTH_SHORT).show();
                         // do something here
                     case R.id.action_settings:
-                        Toast.makeText(MainActivity.this, "settings", Toast.LENGTH_SHORT).show();
                         fragment = new SettingsFragment();
                         break;
                     default:
