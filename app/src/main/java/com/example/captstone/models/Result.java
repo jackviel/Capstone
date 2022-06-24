@@ -1,6 +1,7 @@
 package com.example.captstone.models;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,27 +32,44 @@ public class Result {
     }
 
     // Get result cover from covers API
-    public String getCoverUrl() {
+    public String getBookCoverUrl() {
         return "https://covers.openlibrary.org/b/olid/" + openLibraryId + "-L.jpg?default=false";
     }
 
-    // Returns a Result given the expected JSON
-    public static Result fromJson(JSONObject jsonObject) {
+    // Returns a Result given the expected JSONx
+    public static Result fromJson(JSONObject jsonObject, String mediaType) {
         Result result = new Result();
-        try {
-            // Deserialize json into object fields
-            // Check if a cover edition is available
-            if (jsonObject.has("cover_edition_key")) {
-                result.openLibraryId = jsonObject.getString("cover_edition_key");
-            } else if(jsonObject.has("edition_key")) {
-                final JSONArray ids = jsonObject.getJSONArray("edition_key");
-                result.openLibraryId = ids.getString(0);
+
+        if (mediaType == "Book") {
+            Log.i("RESULTMODEL", "Inside Book");
+            result.mediaType = "Book";
+            try {
+                // Deserialize json into object fields
+                // Check if a cover edition is available
+                if (jsonObject.has("cover_edition_key")) {
+                    result.openLibraryId = jsonObject.getString("cover_edition_key");
+                } else if (jsonObject.has("edition_key")) {
+                    final JSONArray ids = jsonObject.getJSONArray("edition_key");
+                    result.openLibraryId = ids.getString(0);
+                }
+                result.title = jsonObject.has("title_suggest") ? jsonObject.getString("title_suggest") : "";
+                result.creator = getAuthor(jsonObject);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
             }
-            result.title = jsonObject.has("title_suggest") ? jsonObject.getString("title_suggest") : "";
-            result.creator = getAuthor(jsonObject);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
+        }
+        else if (mediaType == "Movie") {
+            Log.i("RESULTMODEL", "Inside Movie");
+            result.mediaType = "Movie";
+            try {
+                // Deserialize json into object fields
+                result.title = jsonObject.getString("title");
+                result.creator = "Director Placeholder";
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
         }
         // Return new object
         return result;
@@ -73,7 +91,7 @@ public class Result {
     }
 
     // Decodes array of result json results into business model objects
-    public static ArrayList<Result> fromJson(JSONArray jsonArray) {
+    public static ArrayList<Result> fromJson(JSONArray jsonArray, String mediaType) {
         ArrayList<Result> results = new ArrayList<>(jsonArray.length());
         // Process each result in json array, decode and convert to business
         // object
@@ -85,7 +103,7 @@ public class Result {
                 e.printStackTrace();
                 continue;
             }
-            Result result = Result.fromJson(resultJson);
+            Result result = Result.fromJson(resultJson, mediaType);
             if (result != null) {
                 results.add(result);
             }

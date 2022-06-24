@@ -92,7 +92,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
         viewHolder.tvMediaType.setText(result.getMediaType());
 
         Glide.with(getContext())
-                .load(Uri.parse(result.getCoverUrl()))
+                .load(Uri.parse(result.getBookCoverUrl()))
                 .apply(new RequestOptions()
                         .placeholder(R.drawable.ic_launcher_background))
                 .into(viewHolder.ivCover);

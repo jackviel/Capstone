@@ -12,11 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -26,7 +23,8 @@ import com.example.captstone.R;
 import com.example.captstone.ResultAdapter;
 import com.example.captstone.models.Result;
 import com.example.captstone.models.Review;
-import com.example.captstone.net.ResultClient;
+import com.example.captstone.net.BookResultClient;
+import com.example.captstone.net.MovieResultClient;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -37,7 +35,6 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 import okhttp3.Headers;
-import okhttp3.Response;
 
 public class ComposeFragment extends Fragment {
 
@@ -50,7 +47,8 @@ public class ComposeFragment extends Fragment {
     public RecyclerView rvResults;
     private ArrayList<Result> aResults;
     private ResultAdapter resultAdapter;
-    private ResultClient resultClient;
+    private BookResultClient bookResultClient;
+    private MovieResultClient movieResultClient;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,35 +87,92 @@ public class ComposeFragment extends Fragment {
         svMedia.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                // Remove all results from the adapter
+                aResults.clear();
+
                 fetchBooks(query);
+                fetchMovies(query);
+
+                // clearing focus on Search View so the function doesn't run twice
+                svMedia.clearFocus();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                fetchBooks(newText);
+                //fetchBooks(newText);
                 return false;
             }
 
             private void fetchBooks(String query) {
-                resultClient = new ResultClient();
-                resultClient.getResults(query, new JsonHttpResponseHandler() {
+                Log.i(TAG, "FETCHING BOOKS");
+                bookResultClient = new BookResultClient();
+                bookResultClient.getResults(query, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Headers headers, JSON response) {
                         try {
-                            JSONArray docs;
+                            JSONArray jsonResults;
                             if (response != null) {
-                                // Get the docs json array
-                                docs = response.jsonObject.getJSONArray("docs");
+                                // Get the jsonResults
+                                jsonResults = response.jsonObject.getJSONArray("docs");
                                 // Parse json array into array of model objects
-                                final ArrayList<Result> results = Result.fromJson(docs);
-                                // Remove all results from the adapter
-                                aResults.clear();
-                                // Load model objects into the adapter
-                                for (Result result : results) {
-                                    aResults.add(result); // add result through the adapter
+                                // final ArrayList<Result> results = Result.fromJson(docs);
+                                // add five books bookResults array
+                                int jsonResultsLength = jsonResults.length();
+                                final ArrayList<Result> results;
+                                if (jsonResultsLength > 0) {
+                                    if (jsonResultsLength > 4)
+                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Book").subList(0, 5));
+                                    else
+                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Book").subList(0, jsonResultsLength));
+                                    // Load model objects into the adapter
+                                    for (Result result : results) {
+                                        aResults.add(result); // add result through the adapter
+                                    }
+                                    resultAdapter.notifyDataSetChanged();
                                 }
-                                resultAdapter.notifyDataSetChanged();
+                            }
+                        } catch (JSONException e) {
+                            // Invalid JSON format, show appropriate error.
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                        // Handle failed request here
+                        Log.e(TAG,
+                                "Request failed with code " + statusCode + ". Response message: " + response);
+                    }
+                });
+            }
+            private void fetchMovies(String query) {
+                Log.i(TAG, "FETCHING MOVIES");
+                movieResultClient = new MovieResultClient();
+                movieResultClient.getResults(query, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Headers headers, JSON response) {
+                        try {
+                            JSONArray jsonResults;
+                            if (response != null) {
+                                // Get jsonResults
+                                jsonResults = response.jsonObject.getJSONArray("results");
+                                // Parse json array into array of model objects
+                                // final ArrayList<Result> results = Result.fromJson(docs);
+                                // add five books bookResults array
+                                int jsonResultsLength = jsonResults.length();
+                                final ArrayList<Result> results;
+                                if (jsonResultsLength > 0) {
+                                    if (jsonResultsLength > 4)
+                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Movie").subList(0, 5));
+                                    else
+                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Movie").subList(0, jsonResultsLength));
+                                    // Load model objects into the adapter
+                                    for (Result result : results) {
+                                        aResults.add(result); // add result through the adapter
+                                    }
+                                    resultAdapter.notifyDataSetChanged();
+                                }
                             }
                         } catch (JSONException e) {
                             // Invalid JSON format, show appropriate error.

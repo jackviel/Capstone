@@ -6,11 +6,11 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-public class ResultClient {
+public class BookResultClient {
     private static final String API_BASE_URL = "https://openlibrary.org/";
     private AsyncHttpClient client;
 
-    public ResultClient() {
+    public BookResultClient() {
         this.client = new AsyncHttpClient();
     }
 
