@@ -8,12 +8,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Result {
     private String openLibraryId;
     private String creator;
     private String title;
     private String mediaType;
+    public static final String TAG = "ResultModel";
 
     public String getOpenLibraryId() {
         return openLibraryId;
@@ -40,8 +42,8 @@ public class Result {
     public static Result fromJson(JSONObject jsonObject, String mediaType) {
         Result result = new Result();
 
-        if (mediaType == "Book") {
-            Log.i("RESULTMODEL", "Inside Book");
+        if (Objects.equals(mediaType, "Book")) {
+            Log.i(TAG, "Inside Book");
             result.mediaType = "Book";
             try {
                 // Deserialize json into object fields
@@ -59,13 +61,25 @@ public class Result {
                 return null;
             }
         }
-        else if (mediaType == "Movie") {
-            Log.i("RESULTMODEL", "Inside Movie");
+        else if (Objects.equals(mediaType, "Movie")) {
+            Log.i(TAG, "Inside Movie");
             result.mediaType = "Movie";
             try {
                 // Deserialize json into object fields
                 result.title = jsonObject.getString("title");
                 result.creator = "Director Placeholder";
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        else if (Objects.equals(mediaType, "Song")) {
+            Log.i(TAG, "Inside Song");
+            result.mediaType = "Song";
+            try {
+                // Deserialize json into object fields
+                result.title = jsonObject.getString("name");
+                result.creator = jsonObject.getString("artist");
             } catch (JSONException e) {
                 e.printStackTrace();
                 return null;

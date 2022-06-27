@@ -25,6 +25,7 @@ import com.example.captstone.models.Result;
 import com.example.captstone.models.Review;
 import com.example.captstone.net.BookResultClient;
 import com.example.captstone.net.MovieResultClient;
+import com.example.captstone.net.MusicResultClient;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -47,8 +48,9 @@ public class ComposeFragment extends Fragment {
     public RecyclerView rvResults;
     private ArrayList<Result> aResults;
     private ResultAdapter resultAdapter;
-    private BookResultClient bookResultClient;
-    private MovieResultClient movieResultClient;
+    private BookResultClient bookResultClient = new BookResultClient();
+    private MovieResultClient movieResultClient = new MovieResultClient();
+    private MusicResultClient musicResultClient = new MusicResultClient();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,6 +94,7 @@ public class ComposeFragment extends Fragment {
 
                 fetchBooks(query);
                 fetchMovies(query);
+                fetchSongs(query);
 
                 // clearing focus on Search View so the function doesn't run twice
                 svMedia.clearFocus();
@@ -106,7 +109,6 @@ public class ComposeFragment extends Fragment {
 
             private void fetchBooks(String query) {
                 Log.i(TAG, "FETCHING BOOKS");
-                bookResultClient = new BookResultClient();
                 bookResultClient.getResults(query, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Headers headers, JSON response) {
@@ -117,7 +119,7 @@ public class ComposeFragment extends Fragment {
                                 jsonResults = response.jsonObject.getJSONArray("docs");
                                 // Parse json array into array of model objects
                                 // final ArrayList<Result> results = Result.fromJson(docs);
-                                // add five books bookResults array
+                                // add five books into the results array
                                 int jsonResultsLength = jsonResults.length();
                                 final ArrayList<Result> results;
                                 if (jsonResultsLength > 0) {
@@ -148,7 +150,6 @@ public class ComposeFragment extends Fragment {
             }
             private void fetchMovies(String query) {
                 Log.i(TAG, "FETCHING MOVIES");
-                movieResultClient = new MovieResultClient();
                 movieResultClient.getResults(query, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Headers headers, JSON response) {
@@ -159,7 +160,7 @@ public class ComposeFragment extends Fragment {
                                 jsonResults = response.jsonObject.getJSONArray("results");
                                 // Parse json array into array of model objects
                                 // final ArrayList<Result> results = Result.fromJson(docs);
-                                // add five books bookResults array
+                                // add five movies into the results array
                                 int jsonResultsLength = jsonResults.length();
                                 final ArrayList<Result> results;
                                 if (jsonResultsLength > 0) {
@@ -167,6 +168,47 @@ public class ComposeFragment extends Fragment {
                                         results = new ArrayList<>(Result.fromJson(jsonResults, "Movie").subList(0, 5));
                                     else
                                         results = new ArrayList<>(Result.fromJson(jsonResults, "Movie").subList(0, jsonResultsLength));
+                                    // Load model objects into the adapter
+                                    for (Result result : results) {
+                                        aResults.add(result); // add result through the adapter
+                                    }
+                                    resultAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        } catch (JSONException e) {
+                            // Invalid JSON format, show appropriate error.
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                        // Handle failed request here
+                        Log.e(TAG,
+                                "Request failed with code " + statusCode + ". Response message: " + response);
+                    }
+                });
+            }
+            private void fetchSongs(String query) {
+                Log.i(TAG, "FETCHING SONGS");
+                musicResultClient.getResults(query, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Headers headers, JSON response) {
+                        try {
+                            JSONArray jsonResults;
+                            if (response != null) {
+                                // Get jsonResults
+                                jsonResults = response.jsonObject.getJSONObject("results").getJSONObject("trackmatches").getJSONArray("track");
+                                // Parse json array into array of model objects
+                                // final ArrayList<Result> results = Result.fromJson(docs);
+                                // add five songs into the results array
+                                int jsonResultsLength = jsonResults.length();
+                                final ArrayList<Result> results;
+                                if (jsonResultsLength > 0) {
+                                    if (jsonResultsLength > 4)
+                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Song").subList(0, 5));
+                                    else
+                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Song").subList(0, jsonResultsLength));
                                     // Load model objects into the adapter
                                     for (Result result : results) {
                                         aResults.add(result); // add result through the adapter
