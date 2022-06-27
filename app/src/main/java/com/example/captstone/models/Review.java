@@ -10,6 +10,9 @@ public class Review extends ParseObject {
     public static final String KEY_BODY = "body";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_USER = "user";
+    public static final String KEY_MEDIA_TYPE = "mediaType";
+    public static final String KEY_MEDIA_TITLE = "mediaTitle";
+    public static final String KEY_MEDIA_CREATOR = "mediaCreator";
 
     public String getBody(){
         return getString(KEY_BODY);
@@ -33,5 +36,29 @@ public class Review extends ParseObject {
 
     public void setUser(ParseUser user){
         put(KEY_USER, user);
+    }
+
+    public String getMediaType(){
+        return getString(KEY_MEDIA_TYPE);
+    }
+
+    public void setMediaType(String mediaType){
+        put(KEY_MEDIA_TYPE, mediaType);
+    }
+
+    public String getMediaTitle(){
+        return getString(KEY_MEDIA_TITLE);
+    }
+
+    public void setMediaTitle(String mediaTitle){
+        put(KEY_MEDIA_TITLE, mediaTitle);
+    }
+
+    public String getMediaCreator(){
+        return getString(KEY_MEDIA_CREATOR);
+    }
+
+    public void setMediaCreator(String mediaCreator){
+        put(KEY_MEDIA_CREATOR, mediaCreator);
     }
 }

@@ -42,15 +42,18 @@ public class ComposeFragment extends Fragment {
     public static final String TAG = "ComposeFragment";
 
     private EditText etBody;
-    private Button bSubmit;
     public ProgressBar pb;
     public SearchView svMedia;
     public RecyclerView rvResults;
+
     private ArrayList<Result> aResults;
     private ResultAdapter resultAdapter;
-    private BookResultClient bookResultClient = new BookResultClient();
-    private MovieResultClient movieResultClient = new MovieResultClient();
-    private MusicResultClient musicResultClient = new MusicResultClient();
+
+    private final BookResultClient bookResultClient = new BookResultClient();
+    private final MovieResultClient movieResultClient = new MovieResultClient();
+    private final MusicResultClient musicResultClient = new MusicResultClient();
+
+    public Result selection;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,7 +67,7 @@ public class ComposeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         etBody = view.findViewById(R.id.etBody);
-        bSubmit = view.findViewById(R.id.bSubmit);
+        Button bSubmit = view.findViewById(R.id.bSubmit);
         pb = view.findViewById(R.id.pbLoading);
         svMedia = view.findViewById(R.id.svMedia);
         rvResults = view.findViewById(R.id.rvResults);
@@ -77,8 +80,11 @@ public class ComposeFragment extends Fragment {
             public void onItemClick(View itemView, int position) {
                 Toast.makeText(
                         getContext(),
-                        "An item at position " + position + " clicked!",
+                        aResults.get(position).getMediaType(),
                         Toast.LENGTH_SHORT).show();
+
+                // set selection to selected result
+                selection = aResults.get(position);
             }
         });
 
@@ -123,10 +129,10 @@ public class ComposeFragment extends Fragment {
                                 int jsonResultsLength = jsonResults.length();
                                 final ArrayList<Result> results;
                                 if (jsonResultsLength > 0) {
-                                    if (jsonResultsLength > 4)
-                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Book").subList(0, 5));
+                                    if (jsonResultsLength > 0)
+                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Book").subList(0, 1));
                                     else
-                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Book").subList(0, jsonResultsLength));
+                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Book").subList(0, 1));
                                     // Load model objects into the adapter
                                     for (Result result : results) {
                                         aResults.add(result); // add result through the adapter
@@ -164,10 +170,10 @@ public class ComposeFragment extends Fragment {
                                 int jsonResultsLength = jsonResults.length();
                                 final ArrayList<Result> results;
                                 if (jsonResultsLength > 0) {
-                                    if (jsonResultsLength > 4)
-                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Movie").subList(0, 5));
+                                    if (jsonResultsLength > 0)
+                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Movie").subList(0, 1));
                                     else
-                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Movie").subList(0, jsonResultsLength));
+                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Movie").subList(0, 1));
                                     // Load model objects into the adapter
                                     for (Result result : results) {
                                         aResults.add(result); // add result through the adapter
@@ -205,10 +211,10 @@ public class ComposeFragment extends Fragment {
                                 int jsonResultsLength = jsonResults.length();
                                 final ArrayList<Result> results;
                                 if (jsonResultsLength > 0) {
-                                    if (jsonResultsLength > 4)
-                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Song").subList(0, 5));
+                                    if (jsonResultsLength > 0)
+                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Song").subList(0, 1));
                                     else
-                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Song").subList(0, jsonResultsLength));
+                                        results = new ArrayList<>(Result.fromJson(jsonResults, "Song").subList(0, 1));
                                     // Load model objects into the adapter
                                     for (Result result : results) {
                                         aResults.add(result); // add result through the adapter
@@ -240,15 +246,18 @@ public class ComposeFragment extends Fragment {
                 return;
             }
             ParseUser currentUser = ParseUser.getCurrentUser();
-            savePost(body, currentUser);
+            savePost(body, currentUser, selection.getMediaType(), selection.getTitle(), selection.getCreator());
         });
 
     }
 
-    private void savePost(String description, ParseUser currentUser) {
+    private void savePost(String description, ParseUser currentUser, String mediaType, String mediaTitle, String mediaCreator) {
         Review review = new Review();
         review.setBody(description);
         review.setUser(currentUser);
+        review.setMediaType(mediaType);
+        review.setMediaTitle(mediaTitle);
+        review.setMediaCreator(mediaCreator);
         pb.setVisibility(ProgressBar.VISIBLE);
         review.saveInBackground(new SaveCallback() {
             @Override
