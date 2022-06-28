@@ -62,14 +62,20 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvUsername;
-        private TextView tvBody;
+        private TextView tvReviewBody;
         private TextView tvTimeAgo;
+        private TextView tvReviewTitle;
+        private TextView tvMediaTitle;
+        private TextView tvMediaType;
         private ImageView ivProfilePic;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvUsername = itemView.findViewById(R.id.tvUsername);
-            tvBody = itemView.findViewById(R.id.tvBody);
+            tvReviewTitle = itemView.findViewById(R.id.tvReviewTitle);
+            tvReviewBody = itemView.findViewById(R.id.tvReviewBody);
+            tvMediaTitle = itemView.findViewById(R.id.tvMediaTitle);
+            tvMediaType = itemView.findViewById(R.id.tvMediaType);
             tvTimeAgo = itemView.findViewById(R.id.tvTimeAgo);
             ivProfilePic = itemView.findViewById(R.id.ivProfilePic);
         }
@@ -78,12 +84,15 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
         public void bind(Review review) {
             //Bind the review data to the view elements
             tvUsername.setText(review.getUser().getUsername());
-            tvBody.setText(review.getBody());
+            tvReviewBody.setText(review.getReviewBody());
+            tvReviewTitle.setText(review.getReviewTitle());
+            tvMediaTitle.setText(review.getMediaTitle());
+            tvMediaType.setText(review.getMediaType());
 
             DateFormat formatter = new SimpleDateFormat("MMMM D");
             String date = formatter.format(review.getCreatedAt());
             int dateLength = date.length();
-            tvTimeAgo.setText(date.substring(0, dateLength - 2) + date.substring(dateLength - 1, dateLength));
+            tvTimeAgo.setText("Posted on " + date.substring(0, dateLength - 2) + date.substring(dateLength - 1, dateLength));
 
             ParseUser reviewUser = review.getUser();
             ParseFile profilePic = reviewUser.getParseFile("profilePic");

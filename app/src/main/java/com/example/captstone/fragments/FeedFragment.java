@@ -112,7 +112,7 @@ public class FeedFragment extends Fragment {
                     return;
                 }
                 for (Review review : reviews) {
-                    Log.i(TAG, "Post: " + review.getBody() + ", username: " + review.getUser().getUsername());
+                    Log.i(TAG, "Review Post: " + review.getReviewTitle() + review.getReviewBody() + ", username: " + review.getUser().getUsername());
                 }
                 allReviews.addAll(reviews);
                 adapter.notifyDataSetChanged();

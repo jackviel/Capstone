@@ -17,7 +17,7 @@ import com.example.captstone.models.Result;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder> {
+public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHolder> {
     private List<Result> mResults;
     private Context mContext;
 
@@ -60,14 +60,14 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
         }
     }
 
-    public ResultAdapter(Context context, ArrayList<Result> aResults) {
+    public ResultsAdapter(Context context, ArrayList<Result> aResults) {
         mResults = aResults;
         mContext = context;
     }
 
     // Usually involves inflating a layout from XML and returning the holder
     @Override
-    public ResultAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ResultsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -75,14 +75,14 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
         View resultView = inflater.inflate(R.layout.item_result, parent, false);
 
         // Return a new holder instance
-        ResultAdapter.ViewHolder viewHolder = new ResultAdapter.ViewHolder(resultView, listener);
+        ResultsAdapter.ViewHolder viewHolder = new ResultsAdapter.ViewHolder(resultView, listener);
         return viewHolder;
     }
 
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(ResultAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(ResultsAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
         Result result = mResults.get(position);
 

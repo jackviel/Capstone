@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.captstone.R;
-import com.example.captstone.ResultAdapter;
+import com.example.captstone.ResultsAdapter;
 import com.example.captstone.models.Result;
 import com.example.captstone.models.Review;
 import com.example.captstone.net.BookResultClient;
@@ -41,13 +41,14 @@ public class ComposeFragment extends Fragment {
 
     public static final String TAG = "ComposeFragment";
 
-    private EditText etBody;
+    private EditText etReviewTitle;
+    private EditText etReviewBody;
     public ProgressBar pb;
     public SearchView svMedia;
     public RecyclerView rvResults;
 
     private ArrayList<Result> aResults;
-    private ResultAdapter resultAdapter;
+    private ResultsAdapter resultsAdapter;
 
     private final BookResultClient bookResultClient = new BookResultClient();
     private final MovieResultClient movieResultClient = new MovieResultClient();
@@ -66,29 +67,25 @@ public class ComposeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        etBody = view.findViewById(R.id.etBody);
+        etReviewTitle = view.findViewById(R.id.etReviewTitle);
+        etReviewBody = view.findViewById(R.id.etReviewBody);
         Button bSubmit = view.findViewById(R.id.bSubmit);
         pb = view.findViewById(R.id.pbLoading);
         svMedia = view.findViewById(R.id.svMedia);
         rvResults = view.findViewById(R.id.rvResults);
 
         aResults = new ArrayList<>();
-        resultAdapter = new ResultAdapter(getContext(), aResults);
+        resultsAdapter = new ResultsAdapter(getContext(), aResults);
 
-        resultAdapter.setOnItemClickListener(new ResultAdapter.OnItemClickListener() {
+        resultsAdapter.setOnItemClickListener(new ResultsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View itemView, int position) {
-                Toast.makeText(
-                        getContext(),
-                        aResults.get(position).getMediaType(),
-                        Toast.LENGTH_SHORT).show();
-
                 // set selection to selected result
                 selection = aResults.get(position);
             }
         });
 
-        rvResults.setAdapter(resultAdapter);
+        rvResults.setAdapter(resultsAdapter);
 
         rvResults.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -137,7 +134,7 @@ public class ComposeFragment extends Fragment {
                                     for (Result result : results) {
                                         aResults.add(result); // add result through the adapter
                                     }
-                                    resultAdapter.notifyDataSetChanged();
+                                    resultsAdapter.notifyDataSetChanged();
                                 }
                             }
                         } catch (JSONException e) {
@@ -178,7 +175,7 @@ public class ComposeFragment extends Fragment {
                                     for (Result result : results) {
                                         aResults.add(result); // add result through the adapter
                                     }
-                                    resultAdapter.notifyDataSetChanged();
+                                    resultsAdapter.notifyDataSetChanged();
                                 }
                             }
                         } catch (JSONException e) {
@@ -219,7 +216,7 @@ public class ComposeFragment extends Fragment {
                                     for (Result result : results) {
                                         aResults.add(result); // add result through the adapter
                                     }
-                                    resultAdapter.notifyDataSetChanged();
+                                    resultsAdapter.notifyDataSetChanged();
                                 }
                             }
                         } catch (JSONException e) {
@@ -240,20 +237,27 @@ public class ComposeFragment extends Fragment {
 
         bSubmit.setOnClickListener(v -> {
             Log.i(TAG, "onClick Submit button");
-            String body = etBody.getText().toString();
-            if (body.isEmpty()) {
-                Toast.makeText(getContext(), "Description can't be empty.", Toast.LENGTH_SHORT).show();
+            String reviewTitle = etReviewTitle.getText().toString();
+            String reviewBody = etReviewBody.getText().toString();
+
+            if (reviewTitle.isEmpty()) {
+                Toast.makeText(getContext(), "Title can't be empty.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (reviewBody.isEmpty()) {
+                Toast.makeText(getContext(), "Body can't be empty.", Toast.LENGTH_SHORT).show();
                 return;
             }
             ParseUser currentUser = ParseUser.getCurrentUser();
-            savePost(body, currentUser, selection.getMediaType(), selection.getTitle(), selection.getCreator());
+            savePost(reviewTitle, reviewBody, currentUser, selection.getMediaType(), selection.getTitle(), selection.getCreator());
         });
 
     }
 
-    private void savePost(String description, ParseUser currentUser, String mediaType, String mediaTitle, String mediaCreator) {
+    private void savePost(String reviewTitle, String reviewBody, ParseUser currentUser, String mediaType, String mediaTitle, String mediaCreator) {
         Review review = new Review();
-        review.setBody(description);
+        review.setReviewTitle(reviewTitle);
+        review.setReviewBody(reviewBody);
         review.setUser(currentUser);
         review.setMediaType(mediaType);
         review.setMediaTitle(mediaTitle);
@@ -267,7 +271,8 @@ public class ComposeFragment extends Fragment {
                     Toast.makeText(getContext(), "Error while saving.", Toast.LENGTH_SHORT).show();
                 }
                 Log.i(TAG, "Review save was successful.");
-                etBody.setText("");
+                etReviewTitle.setText("");
+                etReviewBody.setText("");
                 pb.setVisibility(ProgressBar.INVISIBLE);
         }
     });

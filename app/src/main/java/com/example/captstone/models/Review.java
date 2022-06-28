@@ -7,19 +7,20 @@ import com.parse.ParseUser;
 
 @ParseClassName("Review")
 public class Review extends ParseObject {
-    public static final String KEY_BODY = "body";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_USER = "user";
     public static final String KEY_MEDIA_TYPE = "mediaType";
     public static final String KEY_MEDIA_TITLE = "mediaTitle";
     public static final String KEY_MEDIA_CREATOR = "mediaCreator";
+    public static final String KEY_REVIEW_TITLE = "reviewTitle";
+    public static final String KEY_REVIEW_BODY = "reviewBody";
 
-    public String getBody(){
-        return getString(KEY_BODY);
+    public String getReviewBody(){
+        return getString(KEY_REVIEW_BODY);
     }
 
-    public void setBody(String body){
-        put(KEY_BODY, body);
+    public void setReviewBody(String body){
+        put(KEY_REVIEW_BODY, body);
     }
 
     public ParseFile getImage(){
@@ -60,5 +61,13 @@ public class Review extends ParseObject {
 
     public void setMediaCreator(String mediaCreator){
         put(KEY_MEDIA_CREATOR, mediaCreator);
+    }
+
+    public String getReviewTitle(){
+        return getString(KEY_REVIEW_TITLE);
+    }
+
+    public void setReviewTitle(String reviewTitle){
+        put(KEY_REVIEW_TITLE, reviewTitle);
     }
 }

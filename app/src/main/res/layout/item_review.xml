@@ -17,13 +17,13 @@
         tools:text="ReallyCoolUsername" />
 
     <TextView
-        android:id="@+id/tvBody"
+        android:id="@+id/tvReviewBody"
         android:layout_width="201dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsername"
+        app:layout_constraintTop_toBottomOf="@+id/tvMediaType"
         tools:text="review body......" />
 
     <ImageView
@@ -43,6 +43,36 @@
         android:layout_marginStart="68dp"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBody"
+        app:layout_constraintTop_toBottomOf="@+id/tvReviewBody"
         tools:text="Posted June 13th" />
+
+    <TextView
+        android:id="@+id/tvReviewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsername"
+        tools:text="A must watch comedy!" />
+
+    <TextView
+        android:id="@+id/tvMediaType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMediaTitle"
+        tools:text="Movie" />
+
+    <TextView
+        android:id="@+id/tvMediaTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvReviewTitle"
+        tools:text="Oh Hello on Broadway" />
 </androidx.constraintlayout.widget.ConstraintLayout>
