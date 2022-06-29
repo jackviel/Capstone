@@ -2,7 +2,9 @@ package com.example.captstone;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -117,37 +119,45 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
 
             ArrayList<String> userMediaList = new ArrayList(Objects.requireNonNull(currentUser.getList("userMediaList")));
 
-            // add to my-list button
-            bAddToList.setOnClickListener(v -> {
+            // double tap add to user's list
+            bAddToList.setOnTouchListener(new View.OnTouchListener() {
+                GestureDetector gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener(){
+                    @Override
+                    public boolean onDoubleTap(MotionEvent e) {
+                        Log.i(TAG, "DoubleTap");
+                        String reviewId = review.getObjectId();
 
-                String reviewId = review.getObjectId();
+                        // add media review to list
+                        if (!userMediaList.contains(reviewId)) {
+                            userMediaList.add(review.getObjectId());
 
-                // add media review to list
-                if (!userMediaList.contains(reviewId)) {
-                    userMediaList.add(review.getObjectId());
-
-                    // refresh current ParseUser
-                    currentUser.fetchInBackground();
-                    // put new array with the new list entry
-                    currentUser.put("userMediaList", userMediaList);
-                    // save changes into parse
-                    currentUser.saveInBackground(new SaveCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            if (e != null) {
-                                Log.e(TAG, "Error while saving", e);
-                            }
-                            Log.i(TAG, "Current User save was successful.");
+                            // refresh current ParseUser
+                            currentUser.fetchInBackground();
+                            // put new array with the new list entry
+                            currentUser.put("userMediaList", userMediaList);
+                            Log.i(TAG, "CurrentUser's updated list: " + userMediaList);
+                            // save changes into parse
+                            currentUser.saveInBackground(new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    if (e != null) {
+                                        Log.e(TAG, "Error while saving", e);
+                                    }
+                                    Log.i(TAG, "Current User save was successful.");
+                                }
+                            });
                         }
-                    });
+                        else
+                            Log.i(TAG, "Media already on list!, nothing changed.");
+                        return super.onDoubleTap(e);
+                    }
+                });
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    gestureDetector.onTouchEvent(event);
+                    return false;
                 }
-
-                Log.i(TAG, "bind: " + userMediaList);
-
-                //ArrayList<String> newArray = new ArrayList<>(currentUser.getList("userMediaList"));
-                //newArray.add(review.getObjectId());
-                //currentUser.put("userMediaList", newArray);
             });
         }
     }
-}
+    }
