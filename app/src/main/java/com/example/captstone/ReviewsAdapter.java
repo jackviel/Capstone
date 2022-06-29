@@ -1,29 +1,38 @@
 package com.example.captstone;
 
 import android.content.Context;
-import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.captstone.models.Review;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHolder> {
 
     private Context context;
     private List<Review> reviews;
+
+    public static final String TAG = "ReviewsAdapter";
 
     public ReviewsAdapter(Context context, List<Review> reviews) {
         this.context = context;
@@ -68,6 +77,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
         private TextView tvMediaTitle;
         private TextView tvMediaType;
         private ImageView ivProfilePic;
+        private Button bAddToList;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +88,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
             tvMediaType = itemView.findViewById(R.id.tvMediaType);
             tvTimeAgo = itemView.findViewById(R.id.tvTimeAgo);
             ivProfilePic = itemView.findViewById(R.id.ivProfilePic);
+            bAddToList = itemView.findViewById(R.id.bAddToList);
         }
 
 
@@ -101,6 +112,42 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
             } else {
                 Glide.with(context).load(R.drawable.default_profile_pic).into(ivProfilePic);
             }
+
+            ParseUser currentUser = ParseUser.getCurrentUser();
+
+            ArrayList<String> userMediaList = new ArrayList(Objects.requireNonNull(currentUser.getList("userMediaList")));
+
+            // add to my-list button
+            bAddToList.setOnClickListener(v -> {
+
+                String reviewId = review.getObjectId();
+
+                // add media review to list
+                if (!userMediaList.contains(reviewId)) {
+                    userMediaList.add(review.getObjectId());
+
+                    // refresh current ParseUser
+                    currentUser.fetchInBackground();
+                    // put new array with the new list entry
+                    currentUser.put("userMediaList", userMediaList);
+                    // save changes into parse
+                    currentUser.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e != null) {
+                                Log.e(TAG, "Error while saving", e);
+                            }
+                            Log.i(TAG, "Current User save was successful.");
+                        }
+                    });
+                }
+
+                Log.i(TAG, "bind: " + userMediaList);
+
+                //ArrayList<String> newArray = new ArrayList<>(currentUser.getList("userMediaList"));
+                //newArray.add(review.getObjectId());
+                //currentUser.put("userMediaList", newArray);
+            });
         }
     }
 }
