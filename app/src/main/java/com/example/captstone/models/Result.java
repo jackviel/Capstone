@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Result {
+public final class Result {
     private String openLibraryId;
     private String creator;
     private String title;
@@ -113,7 +113,7 @@ public class Result {
             JSONObject resultJson;
             try {
                 resultJson = jsonArray.getJSONObject(i);
-            } catch (Exception e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
                 continue;
             }

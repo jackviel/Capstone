@@ -43,7 +43,7 @@ public class ComposeFragment extends Fragment {
 
     private EditText etReviewTitle;
     private EditText etReviewBody;
-    public ProgressBar pb;
+    public ProgressBar pbLoading;
     public SearchView svMedia;
     public RecyclerView rvResults;
 
@@ -70,7 +70,7 @@ public class ComposeFragment extends Fragment {
         etReviewTitle = view.findViewById(R.id.etReviewTitle);
         etReviewBody = view.findViewById(R.id.etReviewBody);
         Button bSubmit = view.findViewById(R.id.bSubmit);
-        pb = view.findViewById(R.id.pbLoading);
+        pbLoading = view.findViewById(R.id.pbLoading);
         svMedia = view.findViewById(R.id.svMedia);
         rvResults = view.findViewById(R.id.rvResults);
 
@@ -140,6 +140,8 @@ public class ComposeFragment extends Fragment {
                         } catch (JSONException e) {
                             // Invalid JSON format, show appropriate error.
                             e.printStackTrace();
+                            Log.i(TAG, "Error, invalid JSON format.");
+                            Toast.makeText(getContext(), "Error encountered, please try again.", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -181,6 +183,8 @@ public class ComposeFragment extends Fragment {
                         } catch (JSONException e) {
                             // Invalid JSON format, show appropriate error.
                             e.printStackTrace();
+                            Log.i(TAG, "Error, invalid JSON format.");
+                            Toast.makeText(getContext(), "Error encountered, please try again.", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -222,6 +226,8 @@ public class ComposeFragment extends Fragment {
                         } catch (JSONException e) {
                             // Invalid JSON format, show appropriate error.
                             e.printStackTrace();
+                            Log.i(TAG, "Error, invalid JSON format.");
+                            Toast.makeText(getContext(), "Error encountered, please try again.", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -262,7 +268,7 @@ public class ComposeFragment extends Fragment {
         review.setMediaType(mediaType);
         review.setMediaTitle(mediaTitle);
         review.setMediaCreator(mediaCreator);
-        pb.setVisibility(ProgressBar.VISIBLE);
+        pbLoading.setVisibility(ProgressBar.VISIBLE);
         review.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -273,7 +279,7 @@ public class ComposeFragment extends Fragment {
                 Log.i(TAG, "Review save was successful.");
                 etReviewTitle.setText("");
                 etReviewBody.setText("");
-                pb.setVisibility(ProgressBar.INVISIBLE);
+                pbLoading.setVisibility(ProgressBar.INVISIBLE);
         }
     });
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -66,6 +67,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
     }
 
     // Usually involves inflating a layout from XML and returning the holder
+    @NonNull
     @Override
     public ResultsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();

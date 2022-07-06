@@ -110,6 +110,7 @@ public class FeedFragment extends Fragment {
 
     private void queryPosts() {
         ParseQuery<Review> query = ParseQuery.getQuery(Review.class);
+        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_THEN_NETWORK);
         query.include(Review.KEY_USER);
         query.addDescendingOrder("createdAt");
         query.findInBackground(new FindCallback<Review>() {
