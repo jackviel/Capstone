@@ -63,7 +63,6 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
     // Add a list of items -- change to type used
     public void addAll(List<Review> list) {
         reviews.addAll(list);
-        notifyDataSetChanged();
     }
 
     @Override
@@ -102,10 +101,10 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
             tvMediaTitle.setText(review.getMediaTitle());
             tvMediaType.setText(review.getMediaType());
 
-            DateFormat formatter = new SimpleDateFormat("MMMM D");
-            String date = formatter.format(review.getCreatedAt());
-            int dateLength = date.length();
-            tvTimeAgo.setText("Posted on " + date.substring(0, dateLength - 2) + date.substring(dateLength - 1, dateLength));
+//            DateFormat formatter = new SimpleDateFormat("MMMM D");
+//            String date = formatter.format(review.getCreatedAt());
+//            int dateLength = date.length();
+            tvTimeAgo.setText("Posted on ");
 
             ParseUser reviewUser = review.getUser();
             ParseFile profilePic = reviewUser.getParseFile("profilePic");
