@@ -19,16 +19,13 @@ Social networking app centered around movies, music, and book reviews where the 
 * User can login, create a new account, and logout
 * User can post reviews
 * User can view a feed of other users' reviews
-* User can follow/unfollow other users
-* User can 'thumbs-up' a review
+* User can add a review to their 'my-list'
 
 **Optional Nice-to-have Stories**
 
+* User can change their username
 * User can view their and other users' profiles that has their reviews/opinions
 * User can comment on reviews
-* User can join groups dedicated to certain authors/directors or books/movies
-* User can change their username
-* User can display their favorites on their profile
 
 ### 2. Screen Archetypes
 
