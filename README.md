@@ -25,6 +25,7 @@ Social networking app centered around movies, music, and book reviews where the 
 
 * User can change their username
 * User can view their and other users' profiles that has their reviews
+* User can view their list on their profile
 * User can comment on reviews
 
 ### 2. Screen Archetypes
