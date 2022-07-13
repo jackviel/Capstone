@@ -24,7 +24,7 @@ Social networking app centered around movies, music, and book reviews where the 
 **Optional Nice-to-have Stories**
 
 * User can change their username
-* User can view their and other users' profiles that has their reviews/opinions
+* User can view their and other users' profiles that has their reviews
 * User can comment on reviews
 
 ### 2. Screen Archetypes
