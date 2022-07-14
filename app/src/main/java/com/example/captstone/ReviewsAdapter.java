@@ -101,10 +101,10 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
             tvMediaTitle.setText(review.getMediaTitle());
             tvMediaType.setText(review.getMediaType());
 
-//            DateFormat formatter = new SimpleDateFormat("MMMM D");
-//            String date = formatter.format(review.getCreatedAt());
-//            int dateLength = date.length();
-            tvTimeAgo.setText("Posted on ");
+            //Set the time ago text
+            DateFormat df = new SimpleDateFormat("MMMM dd");
+            String date = df.format(review.getCreatedAt());
+            tvTimeAgo.setText("Review posted on " + date);
 
             ParseUser reviewUser = review.getUser();
             ParseFile profilePic = reviewUser.getParseFile("profilePic");

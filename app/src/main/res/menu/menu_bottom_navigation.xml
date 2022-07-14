@@ -6,22 +6,17 @@
     <item
         android:id="@+id/action_feed"
         android:enabled="true"
-        android:icon="@drawable/instagram_home_outline_24"
+        android:icon="@drawable/home_icon_material"
         android:title="Home"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_compose"
-        android:icon="@drawable/instagram_new_post_outline_24"
+        android:icon="@drawable/compose_icon_material"
         android:title="Compose"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_profile"
-        android:icon="@drawable/instagram_user_outline_24"
-        android:title="Profile"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/action_settings"
-        android:icon="@drawable/ufi_save"
+        android:icon="@drawable/profile_icon_material"
         android:title="Profile"
         app:showAsAction="always" />
 </menu>

@@ -34,12 +34,6 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -141,17 +135,19 @@ public class FeedFragment extends Fragment {
                         Log.e(TAG, "Issue with getting posts", e);
                         return;
                     }
+
+                    allReviews.addAll(reviews);
+                    adapter.notifyDataSetChanged();
+
                     AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             for (Review review : reviews) {
                                 ReviewCache reviewCache = new ReviewCache(review.getReviewTitle(), review.getReviewBody(), review.getUser().getUsername(), review.getCreatedAt().toString(), review.getMediaType(), review.getMediaTitle(), review.getMediaCreator());
                                 reviewDao.insert(reviewCache);
-                                allReviews.addAll(reviews);
                             }
                         }
                     });
-                    adapter.notifyDataSetChanged();
                 }
             });
         }

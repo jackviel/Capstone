@@ -11,18 +11,19 @@ import androidx.fragment.app.Fragment;
 
 import com.example.captstone.R;
 
-public class SettingsFragment extends Fragment {
-    public static final String TAG = "SettingsFragment";
+public class TrendingFragment extends Fragment {
+    public static final String TAG = "TrendingFragment";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        return inflater.inflate(R.layout.fragment_trending, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
     }
 }

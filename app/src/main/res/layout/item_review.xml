@@ -4,85 +4,126 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginVertical="10dp">
+    android:layout_marginHorizontal="12.5dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp">
 
-    <Button
-        android:id="@+id/bAddToList"
+    <com.google.android.material.card.MaterialCardView
+        style="?attr/materialCardViewFilledStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0"
-        android:text="add to my list"
-        android:visibility="visible"
-        tools:layout_editor_absoluteX="16dp" />
+        android:clickable="true">
 
-    <TextView
-        android:id="@+id/tvUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="ReallyCoolUsername" />
+        <Button
+            android:id="@+id/bAddToList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0"
+            android:text="add to my list"
+            android:visibility="visible"
+            tools:layout_editor_absoluteX="16dp" />
 
-    <TextView
-        android:id="@+id/tvReviewBody"
-        android:layout_width="201dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMediaType"
-        tools:text="review body......" />
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="ReallyCoolUsername" />
 
-    <ImageView
-        android:id="@+id/ivProfilePic"
-        android:layout_width="56dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivProfilePic"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.circleImageView"
+            tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/tvTimeAgo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="360dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvReviewBody"
-        tools:text="Posted June 13th" />
+        <TextView
+            android:id="@+id/tvReviewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
+            app:layout_constraintTop_toBottomOf="@+id/tvUsername"
+            tools:text="A must watch comedy!" />
 
-    <TextView
-        android:id="@+id/tvReviewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsername"
-        tools:text="A must watch comedy!" />
+        <TextView
+            android:id="@+id/tvReviewBody"
+            android:layout_width="201dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMediaType"
+            tools:text="review body......" />
 
-    <TextView
-        android:id="@+id/tvMediaType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMediaTitle"
-        tools:text="Movie" />
+        <TextView
+            android:id="@+id/tvMediaTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="120dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvReviewTitle"
+            tools:text="Oh Hello on Broadway" />
 
-    <TextView
-        android:id="@+id/tvMediaTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvReviewTitle"
-        tools:text="Oh Hello on Broadway" />
+        <TextView
+            android:id="@+id/tvMediaType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="75dp"
+            android:layout_marginTop="145dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvMediaTitle"
+            tools:text="Movie" />
+
+        <ImageView
+            android:id="@+id/ivMediaPic"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="180dp"
+            app:srcCompat="@drawable/poster_placeholder"
+            tools:srcCompat="@drawable/poster_placeholder" />
+
+        <TextView
+            android:id="@+id/tvTimeAgo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="545dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvReviewBody"
+            tools:text="Posted June 13th" />
+
+        <RatingBar
+            android:id="@+id/rbRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="65dp"
+            android:layout_marginTop="495dp"
+            android:isIndicator="true"/>
+
+        <ImageButton
+            android:id="@+id/ibAddToList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="285dp"
+            android:layout_marginTop="435dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/add_icon_material"
+            tools:src="@drawable/add_icon_material"
+            tools:srcCompat="@drawable/add_icon_material" />
+
+
+    </com.google.android.material.card.MaterialCardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
