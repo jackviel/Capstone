@@ -43,7 +43,7 @@ public final class Result {
         Result result = new Result();
 
         if (Objects.equals(mediaType, "Book")) {
-            Log.i(TAG, "Inside Book");
+//            Log.i(TAG, "Inside Book");
             result.mediaType = "Book";
             try {
                 // Deserialize json into object fields
@@ -61,8 +61,20 @@ public final class Result {
                 return null;
             }
         }
+        else if (Objects.equals(mediaType, "TrendingBook")) {
+            result.mediaType = "Book";
+            try {
+                // Deserialize json into object fields
+                // Check if a cover edition is available
+                result.title = jsonObject.has("title") ? jsonObject.getString("title") : "";
+                result.creator = jsonObject.has("author") ? jsonObject.getString("author") : "";
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
         else if (Objects.equals(mediaType, "Movie")) {
-            Log.i(TAG, "Inside Movie");
+//            Log.i(TAG, "Inside Movie");
             result.mediaType = "Movie";
             try {
                 // Deserialize json into object fields
@@ -74,12 +86,12 @@ public final class Result {
             }
         }
         else if (Objects.equals(mediaType, "Song")) {
-            Log.i(TAG, "Inside Song");
+//            Log.i(TAG, "Inside Song");
             result.mediaType = "Song";
             try {
                 // Deserialize json into object fields
                 result.title = jsonObject.getString("name");
-                result.creator = jsonObject.getString("artist");
+                result.creator = jsonObject.getJSONObject("artist").getString("name");
             } catch (JSONException e) {
                 e.printStackTrace();
                 return null;

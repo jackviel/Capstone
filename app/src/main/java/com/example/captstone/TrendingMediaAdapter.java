@@ -1,7 +1,6 @@
 package com.example.captstone;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,19 +10,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.captstone.models.Result;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHolder> {
+public class TrendingMediaAdapter extends RecyclerView.Adapter<TrendingMediaAdapter.ViewHolder> {
     private List<Result> mResults;
     private Context mContext;
 
     // Define listener member variable
-    private OnItemClickListener listener;
+    private TrendingMediaAdapter.OnItemClickListener listener;
+
+    // Clean all elements of the recycler
+    public void clear() {
+        mResults.clear();
+        notifyDataSetChanged();
+    }
 
     // Define the listener interface
     public interface OnItemClickListener {
@@ -31,7 +34,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
     }
 
     // Define the method that allows the parent activity or fragment to define the listener
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(TrendingMediaAdapter.OnItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -42,7 +45,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
         public TextView tvCreator;
         public TextView tvMediaType;
 
-        public ViewHolder(final View itemView, final OnItemClickListener clickListener) {
+        public ViewHolder(final View itemView, final TrendingMediaAdapter.OnItemClickListener clickListener) {
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
@@ -61,7 +64,7 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
         }
     }
 
-    public ResultsAdapter(Context context, ArrayList<Result> aResults) {
+    public TrendingMediaAdapter(Context context, ArrayList<Result> aResults) {
         mResults = aResults;
         mContext = context;
     }
@@ -69,22 +72,22 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
     // Usually involves inflating a layout from XML and returning the holder
     @NonNull
     @Override
-    public ResultsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TrendingMediaAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View resultView = inflater.inflate(R.layout.item_result, parent, false);
+        View trendingMediaView = inflater.inflate(R.layout.item_trending_media, parent, false);
 
         // Return a new holder instance
-        ResultsAdapter.ViewHolder viewHolder = new ResultsAdapter.ViewHolder(resultView, listener);
+        TrendingMediaAdapter.ViewHolder viewHolder = new TrendingMediaAdapter.ViewHolder(trendingMediaView, listener);
         return viewHolder;
     }
 
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(ResultsAdapter.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(TrendingMediaAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
         Result result = mResults.get(position);
 
@@ -93,11 +96,11 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
         viewHolder.tvCreator.setText(result.getCreator());
         viewHolder.tvMediaType.setText(result.getMediaType());
 
-        Glide.with(getContext())
-                .load(Uri.parse(result.getBookCoverUrl()))
-                .apply(new RequestOptions()
-                        .placeholder(R.drawable.ic_launcher_background))
-                .into(viewHolder.ivCover);
+//        Glide.with(getContext())
+//                .load(Uri.parse(result.getBookCoverUrl()))
+//                .apply(new RequestOptions()
+//                        .placeholder(R.drawable.ic_launcher_background))
+//                .into(viewHolder.ivCover);
         // Return the completed view to render on screen
     }
 
@@ -111,5 +114,5 @@ public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHold
     private Context getContext() {
         return mContext;
     }
-
 }
+

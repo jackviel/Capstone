@@ -31,7 +31,8 @@ public class LoginScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("Working Title :-)");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         if (ParseUser.getCurrentUser() != null){

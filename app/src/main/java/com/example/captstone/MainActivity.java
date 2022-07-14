@@ -12,6 +12,7 @@ import com.example.captstone.fragments.ComposeFragment;
 import com.example.captstone.fragments.FeedFragment;
 import com.example.captstone.fragments.HomeFragment;
 import com.example.captstone.fragments.ProfileFragment;
+import com.example.captstone.fragments.TrendingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_feed:
                         fragment = new HomeFragment();
                         break;
-                    case R.id.action_compose:
-                        fragment = new ComposeFragment();
+                    case R.id.action_trending:
+                        fragment = new TrendingFragment();
                         break;
                     case R.id.action_profile:
                         fragment = new ProfileFragment();

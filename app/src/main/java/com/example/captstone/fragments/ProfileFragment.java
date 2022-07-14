@@ -27,8 +27,6 @@ public class ProfileFragment extends Fragment {
 
     private ImageView ivProfilePic;
     private TextView tvUsername;
-    private Button bLogout;
-    private Button bChangeUsername;
 
     TabLayout tabLayout;
     ViewPager2 viewPager;
@@ -47,21 +45,12 @@ public class ProfileFragment extends Fragment {
 
         ivProfilePic = view.findViewById(R.id.ivProfilePic);
         tvUsername = view.findViewById(R.id.tvUsername);
-        bLogout = view.findViewById(R.id.bLogout);
-        bChangeUsername = view.findViewById(R.id.bChangeUsername);
+
         tabLayout = view.findViewById(R.id.tabLayout);
         viewPager = view.findViewById(R.id.viewPager);
         adapter = new ProfileViewPagerAdapter(this);
         viewPager.setAdapter(adapter);
 
         tvUsername.setText(ParseUser.getCurrentUser().getUsername());
-
-        bLogout.setOnClickListener(v -> {
-            Log.i(TAG, "onClick Logout button " + ParseUser.getCurrentUser());
-            ParseUser.logOut();
-            Intent i = new Intent(getContext(), LoginScreenActivity.class);
-            startActivity(i);
-        });
-
     }
-    }
+}
