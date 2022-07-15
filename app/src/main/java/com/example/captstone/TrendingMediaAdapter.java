@@ -1,6 +1,8 @@
 package com.example.captstone;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.captstone.fragments.SelectedMediaFragment;
 import com.example.captstone.models.Result;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +71,23 @@ public class TrendingMediaAdapter extends RecyclerView.Adapter<TrendingMediaAdap
                     int position = getAdapterPosition();
                     // print out the media title and creator
                     Log.i(TAG, "Position: " + position + " Title: " + mResults.get(position).getTitle() + " Creator: " + mResults.get(position).getCreator());
+
+                    // make sure the position is valid
+                    if (position != RecyclerView.NO_POSITION) {
+                        // get the movie at the position clicked
+                        Result result = mResults.get(position);
+                        // launch selected media fragment
+                        SelectedMediaFragment selectedMediaFragment = new SelectedMediaFragment();
+                        // pass the movie to the fragment
+                        Bundle args = new Bundle();
+                        args.putParcelable("result", Parcels.wrap(result));
+                        selectedMediaFragment.setArguments(args);
+                        // launch the fragment
+                        ((MainActivity) mContext).getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.flContainer, selectedMediaFragment, SelectedMediaFragment.TAG)
+                                .addToBackStack(null)
+                                .commit();
+                    }
                 }
             });
         }

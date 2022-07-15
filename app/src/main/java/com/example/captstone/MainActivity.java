@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new HomeFragment();
                         break;
                     case R.id.action_trending:
-                        fragment = new TrendingFragment();
+                        fragment = new TrendingFeedFragment();
                         break;
                     case R.id.action_profile:
                         fragment = new ProfileFragment();

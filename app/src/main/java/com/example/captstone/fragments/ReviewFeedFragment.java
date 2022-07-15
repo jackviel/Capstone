@@ -12,10 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SnapHelper;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
@@ -48,7 +46,6 @@ public class ReviewFeedFragment extends Fragment {
     private EndlessRecyclerViewScrollListener scrollListener;
     private LinearLayoutManager manager;
     private PagerSnapHelper pagerSnapHelper;
-
     protected ReviewsAdapter adapter;
     protected List<Review> allReviews;
 
@@ -96,15 +93,15 @@ public class ReviewFeedFragment extends Fragment {
         // set the adapter on the recycler view
         rvReviews.setAdapter(adapter);
         manager = new LinearLayoutManager(getContext());
-        rvReviews.setLayoutManager(manager);
         // set the layout manager on the recycler view
+        rvReviews.setLayoutManager(manager);
         // query reviews
-        queryPosts();
+        queryReviews();
 
         scrollListener = new EndlessRecyclerViewScrollListener(manager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                queryPosts();
+                queryReviews();
             }
         };
 
@@ -119,14 +116,13 @@ public class ReviewFeedFragment extends Fragment {
         // getHomeTimeline is an example endpoint.
         swipeContainer.setRefreshing(true);
         adapter.clear();
-        queryPosts();
+        queryReviews();
         swipeContainer.setRefreshing(false);
     }
 
-    private void queryPosts() {
+    private void queryReviews() {
         if (isNetworkAvailable()) {
             ParseQuery<Review> query = ParseQuery.getQuery(Review.class);
-            //query.setCachePolicy(ParseQuery.CachePolicy.CACHE_THEN_NETWORK);
             query.include(Review.KEY_USER);
             query.addDescendingOrder("createdAt");
             query.findInBackground(new FindCallback<Review>() {

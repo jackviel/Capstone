@@ -17,9 +17,9 @@ import com.google.android.material.tabs.TabLayout;
 public class TrendingFragment extends Fragment {
     public static final String TAG = "TrendingFragment";
 
-    TabLayout tabLayout;
-    ViewPager2 viewPager;
-    TrendingViewPagerAdapter adapter;
+    private TabLayout tabLayout;
+    private ViewPager2 viewPager;
+    private TrendingViewPagerAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
