@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -37,7 +38,7 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FeedFragment extends Fragment {
+public class ReviewFeedFragment extends Fragment {
 
     public static final String TAG = "FeedFragment";
 
@@ -46,12 +47,12 @@ public class FeedFragment extends Fragment {
     private SwipeRefreshLayout swipeContainer;
     private EndlessRecyclerViewScrollListener scrollListener;
     private LinearLayoutManager manager;
-    private SnapHelper snapHelper;
+    private PagerSnapHelper pagerSnapHelper;
 
     protected ReviewsAdapter adapter;
     protected List<Review> allReviews;
 
-    public FeedFragment() {
+    public ReviewFeedFragment() {
         // Required empty public constructor
     }
     @Override
@@ -85,8 +86,8 @@ public class FeedFragment extends Fragment {
 
         rvReviews = view.findViewById(R.id.rvReviews);
 
-        snapHelper = new LinearSnapHelper();
-        snapHelper.attachToRecyclerView(rvReviews);
+        pagerSnapHelper = new PagerSnapHelper();
+        pagerSnapHelper.attachToRecyclerView(rvReviews);
 
         // initialize the array that will hold posts and create a PostsAdapter
         allReviews = new ArrayList<>();

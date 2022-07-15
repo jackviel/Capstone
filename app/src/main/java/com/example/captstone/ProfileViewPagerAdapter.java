@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.captstone.fragments.FeedFragment;
 import com.example.captstone.fragments.SettingsFragment;
 
 public class ProfileViewPagerAdapter extends FragmentStateAdapter {

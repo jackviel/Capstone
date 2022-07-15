@@ -1,6 +1,7 @@
 package com.example.captstone;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrendingMediaAdapter extends RecyclerView.Adapter<TrendingMediaAdapter.ViewHolder> {
+
+    private static final String TAG = "TrendingMediaAdapter";
+
     private List<Result> mResults;
     private Context mContext;
 
@@ -58,7 +62,10 @@ public class TrendingMediaAdapter extends RecyclerView.Adapter<TrendingMediaAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    clickListener.onItemClick(itemView, getAdapterPosition());
+                    // get the position of the item clicked
+                    int position = getAdapterPosition();
+                    // print out the media title and creator
+                    Log.i(TAG, "Position: " + position + " Title: " + mResults.get(position).getTitle() + " Creator: " + mResults.get(position).getCreator());
                 }
             });
         }

@@ -5,10 +5,11 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.captstone.fragments.ReviewFeedFragment;
+import com.example.captstone.fragments.TrendingFeedFragment;
 
-public class HomeViewPagerAdapter extends FragmentStateAdapter {
+public class TrendingViewPagerAdapter extends FragmentStateAdapter {
 
-    public HomeViewPagerAdapter(@NonNull Fragment fragment) {
+    public TrendingViewPagerAdapter(@NonNull Fragment fragment) {
         super(fragment);
     }
 
@@ -17,16 +18,14 @@ public class HomeViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new ReviewFeedFragment();
-            case 1:
-                return new ReviewFeedFragment();
+                return new TrendingFeedFragment();
             default:
-                return new ReviewFeedFragment();
+                return new TrendingFeedFragment();
         }
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 1;
     }
 }

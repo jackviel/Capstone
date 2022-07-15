@@ -8,10 +8,10 @@ import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.captstone.fragments.ComposeFragment;
-import com.example.captstone.fragments.FeedFragment;
+import com.example.captstone.fragments.ReviewFeedFragment;
 import com.example.captstone.fragments.HomeFragment;
 import com.example.captstone.fragments.ProfileFragment;
+import com.example.captstone.fragments.TrendingFeedFragment;
 import com.example.captstone.fragments.TrendingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new ProfileFragment();
                         break;
                     default:
-                        fragment = new FeedFragment();
+                        fragment = new ReviewFeedFragment();
                         break;
                 }
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();

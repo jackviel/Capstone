@@ -83,8 +83,8 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvUsername = itemView.findViewById(R.id.tvUsername);
-            tvReviewTitle = itemView.findViewById(R.id.tvReviewTitle);
-            tvReviewBody = itemView.findViewById(R.id.tvReviewBody);
+//            tvReviewTitle = itemView.findViewById(R.id.tvReviewTitle);
+//            tvReviewBody = itemView.findViewById(R.id.tvReviewBody);
             tvMediaTitle = itemView.findViewById(R.id.tvMediaTitle);
             tvMediaType = itemView.findViewById(R.id.tvMediaType);
             tvTimeAgo = itemView.findViewById(R.id.tvTimeAgo);
@@ -96,8 +96,8 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
         public void bind(Review review) {
             //Bind the review data to the view elements
             tvUsername.setText(review.getUser().getUsername());
-            tvReviewBody.setText(review.getReviewBody());
-            tvReviewTitle.setText(review.getReviewTitle());
+//            tvReviewBody.setText(review.getReviewBody());
+//            tvReviewTitle.setText(review.getReviewTitle());
             tvMediaTitle.setText(review.getMediaTitle());
             tvMediaType.setText(review.getMediaType());
 

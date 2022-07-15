@@ -49,7 +49,9 @@ public class ProfileFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tabLayout);
         viewPager = view.findViewById(R.id.viewPager);
         adapter = new ProfileViewPagerAdapter(this);
+        viewPager.setUserInputEnabled(false);
         viewPager.setAdapter(adapter);
+
 
         tvUsername.setText(ParseUser.getCurrentUser().getUsername());
     }

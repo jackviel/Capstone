@@ -65,8 +65,7 @@ public final class Result {
             result.mediaType = "Book";
             try {
                 // Deserialize json into object fields
-                // Check if a cover edition is available
-                result.title = jsonObject.has("title") ? jsonObject.getString("title") : "";
+                result.title = jsonObject.has("title") ? convertToTitleCase(jsonObject.getString("title")) : "";
                 result.creator = jsonObject.has("author") ? jsonObject.getString("author") : "";
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -135,5 +134,27 @@ public final class Result {
             }
         }
         return results;
+    }
+    public static String convertToTitleCase(String text) {
+        if (text == null || text.isEmpty()) {
+            return text;
+        }
+
+        StringBuilder converted = new StringBuilder();
+
+        boolean convertNext = true;
+        for (char ch : text.toCharArray()) {
+            if (Character.isSpaceChar(ch)) {
+                convertNext = true;
+            } else if (convertNext) {
+                ch = Character.toTitleCase(ch);
+                convertNext = false;
+            } else {
+                ch = Character.toLowerCase(ch);
+            }
+            converted.append(ch);
+        }
+
+        return converted.toString();
     }
 }

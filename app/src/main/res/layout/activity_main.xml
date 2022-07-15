@@ -20,6 +20,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginTop="40dp"
         app:itemBackground="@color/white"
+        app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintEnd_toEndOf="parent"
         app:menu="@menu/menu_bottom_navigation" />

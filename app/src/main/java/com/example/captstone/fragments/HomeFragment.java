@@ -35,6 +35,7 @@ public class HomeFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tabLayout);
         viewPager = view.findViewById(R.id.viewPager);
         adapter = new HomeViewPagerAdapter(this);
+        viewPager.setUserInputEnabled(false);
         viewPager.setAdapter(adapter);
 
     }
