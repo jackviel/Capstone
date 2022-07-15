@@ -1,9 +1,10 @@
-package com.example.captstone;
+package com.example.captstone.viewPagerAdapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.captstone.fragments.MyReviewsFragment;
 import com.example.captstone.fragments.SettingsFragment;
 
 public class ProfileViewPagerAdapter extends FragmentStateAdapter {
@@ -17,7 +18,7 @@ public class ProfileViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new SettingsFragment();
+                return new MyReviewsFragment();
             case 1:
                 return new SettingsFragment();
             case 2:

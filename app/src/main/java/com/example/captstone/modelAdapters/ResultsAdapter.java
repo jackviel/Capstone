@@ -1,4 +1,4 @@
-package com.example.captstone;
+package com.example.captstone.modelAdapters;
 
 import android.content.Context;
 import android.net.Uri;
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.captstone.R;
 import com.example.captstone.models.Result;
 
 import java.util.ArrayList;

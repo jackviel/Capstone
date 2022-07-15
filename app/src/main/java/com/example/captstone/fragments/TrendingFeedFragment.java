@@ -17,7 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.captstone.EndlessRecyclerViewScrollListener;
 import com.example.captstone.R;
-import com.example.captstone.TrendingMediaAdapter;
+import com.example.captstone.modelAdapters.TrendingMediaAdapter;
 import com.example.captstone.models.Result;
 import com.example.captstone.net.BookTrendingClient;
 import com.example.captstone.net.MovieTrendingClient;

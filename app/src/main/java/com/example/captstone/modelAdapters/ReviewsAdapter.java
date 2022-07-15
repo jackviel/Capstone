@@ -1,4 +1,4 @@
-package com.example.captstone;
+package com.example.captstone.modelAdapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,14 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.captstone.R;
 import com.example.captstone.models.Review;
 import com.parse.ParseException;
 import com.parse.ParseFile;

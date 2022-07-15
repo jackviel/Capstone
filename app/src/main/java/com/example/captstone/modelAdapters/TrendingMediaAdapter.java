@@ -1,7 +1,6 @@
-package com.example.captstone;
+package com.example.captstone.modelAdapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.captstone.MainActivity;
+import com.example.captstone.R;
 import com.example.captstone.fragments.SelectedMediaFragment;
 import com.example.captstone.models.Result;
 

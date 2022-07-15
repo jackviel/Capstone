@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.captstone.R;
-import com.example.captstone.TrendingViewPagerAdapter;
+import com.example.captstone.viewPagerAdapters.TrendingViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class TrendingFragment extends Fragment {

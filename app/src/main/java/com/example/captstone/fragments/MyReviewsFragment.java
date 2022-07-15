@@ -1,10 +1,12 @@
 package com.example.captstone.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.captstone.EndlessRecyclerViewScrollListener;
+import com.example.captstone.LoginScreenActivity;
 import com.example.captstone.R;
 import com.example.captstone.modelAdapters.ReviewsAdapter;
 import com.example.captstone.models.Result;
@@ -21,17 +24,15 @@ import com.example.captstone.models.Review;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectedMediaFragment extends Fragment {
-    public static final String TAG = "SelectedMediaFragment";
-
-    private TextView tvTitle;
-    private TextView tvMediaType;
+public class MyReviewsFragment extends Fragment {
+    public static final String TAG = "MyReviewsFragment";
 
     private RecyclerView rvReviews;
     private LinearLayoutManager manager;
@@ -45,15 +46,13 @@ public class SelectedMediaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_selected_media, container, false);
+        return inflater.inflate(R.layout.fragment_feed, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        tvTitle = view.findViewById(R.id.tvTitle);
-        tvMediaType = view.findViewById(R.id.tvMediaType);
         rvReviews = view.findViewById(R.id.rvReviews);
 
         allReviews = new ArrayList<>();
@@ -74,18 +73,6 @@ public class SelectedMediaFragment extends Fragment {
         };
 
         rvReviews.addOnScrollListener(scrollListener);
-
-
-        Bundle args = getArguments();
-        if (args != null) {
-            Result result = new Result();
-            result = Parcels.unwrap(args.getParcelable("result"));
-            tvTitle.setText(result.getTitle());
-            mediaTitle = result.getTitle();
-            tvMediaType.setText(mediaTitle);
-            Log.d(TAG, "onViewCreated: " + result.getTitle());
-        }
-
     }
 
     private void queryReviews() {
@@ -100,7 +87,7 @@ public class SelectedMediaFragment extends Fragment {
                     return;
                 }
                 for (Review review : reviews) {
-                    if (review.getMediaTitle().equals(mediaTitle)) {
+                    if (review.getUser().getUsername().equals(ParseUser.getCurrentUser().getUsername())) {
                         allReviews.add(review);
                     }
                 }

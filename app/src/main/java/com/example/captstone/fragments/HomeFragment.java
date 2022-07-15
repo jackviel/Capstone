@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.captstone.R;
-import com.example.captstone.HomeViewPagerAdapter;
+import com.example.captstone.viewPagerAdapters.HomeViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class HomeFragment extends Fragment {

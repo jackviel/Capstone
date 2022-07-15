@@ -24,7 +24,7 @@ import android.view.ViewGroup;
 import com.example.captstone.EndlessRecyclerViewScrollListener;
 import com.example.captstone.ParseApplication;
 import com.example.captstone.R;
-import com.example.captstone.ReviewsAdapter;
+import com.example.captstone.modelAdapters.ReviewsAdapter;
 
 import com.example.captstone.cacheModels.ReviewCache;
 import com.example.captstone.cacheModels.ReviewDao;

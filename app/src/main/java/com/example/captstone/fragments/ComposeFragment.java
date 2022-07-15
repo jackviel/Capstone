@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.captstone.R;
-import com.example.captstone.ResultsAdapter;
+import com.example.captstone.modelAdapters.ResultsAdapter;
 import com.example.captstone.models.Result;
 import com.example.captstone.models.Review;
 import com.example.captstone.net.BookResultClient;

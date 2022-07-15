@@ -1,12 +1,9 @@
 package com.example.captstone.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,9 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.captstone.HomeViewPagerAdapter;
-import com.example.captstone.LoginScreenActivity;
-import com.example.captstone.ProfileViewPagerAdapter;
+import com.example.captstone.viewPagerAdapters.ProfileViewPagerAdapter;
 import com.example.captstone.R;
 import com.google.android.material.tabs.TabLayout;
 import com.parse.ParseUser;
@@ -51,6 +46,30 @@ public class ProfileFragment extends Fragment {
         adapter = new ProfileViewPagerAdapter(this);
         viewPager.setUserInputEnabled(false);
         viewPager.setAdapter(adapter);
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                tabLayout.getTabAt(position).select();
+            }
+        });
 
 
         tvUsername.setText(ParseUser.getCurrentUser().getUsername());
