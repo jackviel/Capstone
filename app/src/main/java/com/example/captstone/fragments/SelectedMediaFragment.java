@@ -82,7 +82,7 @@ public class SelectedMediaFragment extends Fragment {
             result = Parcels.unwrap(args.getParcelable("result"));
             tvTitle.setText(result.getTitle());
             mediaTitle = result.getTitle();
-            tvMediaType.setText(mediaTitle);
+            tvMediaType.setText(result.getMediaType());
             Log.d(TAG, "onViewCreated: " + result.getTitle());
         }
 

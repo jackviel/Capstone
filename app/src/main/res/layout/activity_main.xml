@@ -25,4 +25,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:menu="@menu/menu_bottom_navigation" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:visibility="gone" />
+
 </RelativeLayout>

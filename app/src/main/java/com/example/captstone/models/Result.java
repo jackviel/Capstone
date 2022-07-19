@@ -92,7 +92,7 @@ public final class Result {
             try {
                 // Deserialize json into object fields
                 result.title = jsonObject.getString("name");
-                result.creator = jsonObject.getJSONObject("artist").getString("name");
+                result.creator = jsonObject.getString("artist");
             } catch (JSONException e) {
                 e.printStackTrace();
                 return null;

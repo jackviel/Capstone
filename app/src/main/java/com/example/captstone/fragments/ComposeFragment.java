@@ -43,9 +43,9 @@ public class ComposeFragment extends Fragment {
 
     private EditText etReviewTitle;
     private EditText etReviewBody;
-    public ProgressBar pbLoading;
     public SearchView svMedia;
     public RecyclerView rvResults;
+    public ProgressBar pbLoading;
 
     private ArrayList<Result> aResults;
     private ResultsAdapter resultsAdapter;

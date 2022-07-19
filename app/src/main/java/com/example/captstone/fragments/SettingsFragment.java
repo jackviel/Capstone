@@ -21,6 +21,7 @@ public class SettingsFragment extends Fragment {
 
     private Button bLogout;
     private Button bChangeUsername;
+    private Button bChangeProfilePic;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,6 +36,7 @@ public class SettingsFragment extends Fragment {
 
         bLogout = view.findViewById(R.id.bLogout);
         bChangeUsername = view.findViewById(R.id.bChangeUsername);
+        bChangeProfilePic = view.findViewById(R.id.bChangeProfilePic);
 
         bLogout.setOnClickListener(v -> {
             Log.i(TAG, "onClick Logout button " + ParseUser.getCurrentUser());
@@ -42,5 +44,6 @@ public class SettingsFragment extends Fragment {
             Intent i = new Intent(getContext(), LoginScreenActivity.class);
             startActivity(i);
         });
+
     }
 }
