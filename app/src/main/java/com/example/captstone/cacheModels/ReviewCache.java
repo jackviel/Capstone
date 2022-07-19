@@ -20,8 +20,6 @@ public class ReviewCache {
     @NonNull
     @ColumnInfo
     @PrimaryKey
-    public String reviewTitle;
-    @ColumnInfo
     public String reviewBody;
     @ColumnInfo
     public String user;
@@ -38,8 +36,7 @@ public class ReviewCache {
         // default constructor
     }
 
-    public ReviewCache(@NonNull String reviewTitle, String reviewBody, String user, String createdAt, String mediaType, String mediaTitle, String mediaCreator) {
-        this.reviewTitle = reviewTitle;
+    public ReviewCache(@NonNull String reviewBody, String user, String createdAt, String mediaType, String mediaTitle, String mediaCreator) {
         this.reviewBody = reviewBody;
         this.user = user;
         this.createdAt = createdAt;
@@ -52,7 +49,6 @@ public class ReviewCache {
         List<Review> reviews = new ArrayList<>();
         for (ReviewCache reviewCache : reviewCaches) {
             Review review = new Review();
-            review.setReviewTitle(reviewCache.reviewTitle);
             review.setReviewBody(reviewCache.reviewBody);
             review.setUser(ParseUser.getCurrentUser());
             review.setCreatedAt(reviewCache.createdAt);

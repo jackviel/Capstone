@@ -140,7 +140,7 @@ public class ReviewFeedFragment extends Fragment {
                         @Override
                         public void run() {
                             for (Review review : reviews) {
-                                ReviewCache reviewCache = new ReviewCache(review.getReviewTitle(), review.getReviewBody(), review.getUser().getUsername(), review.getCreatedAt().toString(), review.getMediaType(), review.getMediaTitle(), review.getMediaCreator());
+                                ReviewCache reviewCache = new ReviewCache(review.getReviewBody(), review.getUser().getUsername(), review.getCreatedAt().toString(), review.getMediaType(), review.getMediaTitle(), review.getMediaCreator());
                                 reviewDao.insert(reviewCache);
                             }
                         }

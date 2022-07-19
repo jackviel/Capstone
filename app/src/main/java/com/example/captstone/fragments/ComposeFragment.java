@@ -255,12 +255,12 @@ public class ComposeFragment extends Fragment {
                 return;
             }
             ParseUser currentUser = ParseUser.getCurrentUser();
-            savePost(reviewTitle, reviewBody, currentUser, selection.getMediaType(), selection.getTitle(), selection.getCreator());
+            saveReview(reviewTitle, reviewBody, currentUser, selection.getMediaType(), selection.getTitle(), selection.getCreator());
         });
 
     }
 
-    private void savePost(String reviewTitle, String reviewBody, ParseUser currentUser, String mediaType, String mediaTitle, String mediaCreator) {
+    private void saveReview(String reviewTitle, String reviewBody, ParseUser currentUser, String mediaType, String mediaTitle, String mediaCreator) {
         Review review = new Review();
         review.setReviewTitle(reviewTitle);
         review.setReviewBody(reviewBody);

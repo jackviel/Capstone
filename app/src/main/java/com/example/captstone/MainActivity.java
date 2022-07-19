@@ -42,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     public final static String TAG = "MainActivity";
 
-    public RecyclerView rvResults;
-    public ProgressBar pbLoading;
+    private RecyclerView rvResults;
+    private ProgressBar pbLoading;
+    private SearchView svMedia;
+    private SearchManager searchManager;
 
     private ArrayList<Result> aResults;
     private ResultsAdapter resultsAdapter;
@@ -113,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
                 // set selection to selected result
                 selection = aResults.get(position);
                 Log.i(TAG, "Clicked on: " + selection.getTitle());
+                // launch detail fragment
+
             }
         });
 
@@ -120,11 +124,11 @@ public class MainActivity extends AppCompatActivity {
 
         rvResults.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setQueryHint("Search");
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        svMedia = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        svMedia.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        svMedia.setQueryHint("Search");
+        svMedia.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // Remove all results from the adapter
@@ -134,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                 fetchSongs(query);
                 fetchBooks(query);
                 // clear focus on search view so it doesn't fetch twice
-                searchView.clearFocus();
+                svMedia.clearFocus();
 
                 return false;
             }
