@@ -106,7 +106,6 @@ public class ComposeFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //fetchBooks(newText);
                 return false;
             }
 
@@ -121,7 +120,6 @@ public class ComposeFragment extends Fragment {
                                 // Get the jsonResults
                                 jsonResults = response.jsonObject.getJSONArray("docs");
                                 // Parse json array into array of model objects
-                                // final ArrayList<Result> results = Result.fromJson(docs);
                                 // add five books into the results array
                                 int jsonResultsLength = jsonResults.length();
                                 final ArrayList<Result> results;
@@ -164,7 +162,6 @@ public class ComposeFragment extends Fragment {
                                 // Get jsonResults
                                 jsonResults = response.jsonObject.getJSONArray("results");
                                 // Parse json array into array of model objects
-                                // final ArrayList<Result> results = Result.fromJson(docs);
                                 // add five movies into the results array
                                 int jsonResultsLength = jsonResults.length();
                                 final ArrayList<Result> results;
@@ -207,7 +204,6 @@ public class ComposeFragment extends Fragment {
                                 // Get jsonResults
                                 jsonResults = response.jsonObject.getJSONObject("results").getJSONObject("trackmatches").getJSONArray("track");
                                 // Parse json array into array of model objects
-                                // final ArrayList<Result> results = Result.fromJson(docs);
                                 // add five songs into the results array
                                 int jsonResultsLength = jsonResults.length();
                                 final ArrayList<Result> results;

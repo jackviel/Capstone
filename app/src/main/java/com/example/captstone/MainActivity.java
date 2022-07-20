@@ -164,8 +164,7 @@ public class MainActivity extends AppCompatActivity {
                                 // Get the jsonResults
                                 jsonResults = response.jsonObject.getJSONArray("docs");
                                 // Parse json array into array of model objects
-                                // final ArrayList<Result> results = Result.fromJson(docs);
-                                // add five books into the results array
+                                // add books into the results array
                                 int jsonResultsLength = jsonResults.length();
                                 final ArrayList<Result> results;
                                 if (jsonResultsLength > 0) {
@@ -209,8 +208,7 @@ public class MainActivity extends AppCompatActivity {
                                 // Get jsonResults
                                 jsonResults = response.jsonObject.getJSONArray("results");
                                 // Parse json array into array of model objects
-                                // final ArrayList<Result> results = Result.fromJson(docs);
-                                // add five movies into the results array
+                                // add movies into the results array
                                 int jsonResultsLength = jsonResults.length();
                                 final ArrayList<Result> results;
                                 if (jsonResultsLength > 0) {
@@ -254,17 +252,16 @@ public class MainActivity extends AppCompatActivity {
                                 // Get jsonResults
                                 jsonResults = response.jsonObject.getJSONObject("results").getJSONObject("trackmatches").getJSONArray("track");
                                 // Parse json array into array of model objects
-                                // final ArrayList<Result> results = Result.fromJson(docs);
-                                // add five songs into the results array
+                                // add songs into the results array
                                 int jsonResultsLength = jsonResults.length();
                                 final ArrayList<Result> results;
+                                Log.i(TAG, "onSuccess: length of jsonResults: " + jsonResultsLength);
                                 if (jsonResultsLength > 0) {
                                     if (jsonResultsLength > 2)
                                         results = new ArrayList<>(Result.fromJson(jsonResults, "Song").subList(0, 1));
                                     else
                                         results = null;
                                     // Load model objects into the adapter
-                                    Log.i(TAG, "onSuccess: lengthdawg" + results.size());
                                     if (results != null) {
                                         for (Result result : results) {
                                             aResults.add(result); // add result through the adapter

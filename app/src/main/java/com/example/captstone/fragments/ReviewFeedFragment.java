@@ -74,9 +74,6 @@ public class ReviewFeedFragment extends Fragment {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // Your code to refresh the list here.
-                // Make sure you call swipeContainer.setRefreshing(false)
-                // once the network request has completed successfully.
                 fetchTimelineAsync(0);
             }
         });
@@ -111,9 +108,6 @@ public class ReviewFeedFragment extends Fragment {
     }
 
     public void fetchTimelineAsync(int page) {
-        // Send the network request to fetch the updated data
-        // `client` here is an instance of Android Async HTTP
-        // getHomeTimeline is an example endpoint.
         swipeContainer.setRefreshing(true);
         adapter.clear();
         queryReviews();

@@ -68,7 +68,6 @@ public class MyReviewsFragment extends Fragment {
         scrollListener = new EndlessRecyclerViewScrollListener(manager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-//                queryReviews();
             }
         };
 

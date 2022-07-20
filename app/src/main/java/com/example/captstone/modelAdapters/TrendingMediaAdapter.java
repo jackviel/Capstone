@@ -127,6 +127,7 @@ public class TrendingMediaAdapter extends RecyclerView.Adapter<TrendingMediaAdap
         viewHolder.tvCreator.setText(result.getCreator());
         viewHolder.tvMediaType.setText(result.getMediaType());
 
+        // set the image to the imageview (commented out for now, images aren't implemented yet)
 //        Glide.with(getContext())
 //                .load(Uri.parse(result.getBookCoverUrl()))
 //                .apply(new RequestOptions()

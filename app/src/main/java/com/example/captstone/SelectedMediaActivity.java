@@ -84,7 +84,6 @@ public class SelectedMediaActivity extends AppCompatActivity {
         scrollListener = new EndlessRecyclerViewScrollListener(manager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-//                queryReviews();
             }
         };
 

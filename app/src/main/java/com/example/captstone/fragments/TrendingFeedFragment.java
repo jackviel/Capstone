@@ -63,9 +63,6 @@ public class TrendingFeedFragment extends Fragment {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // Your code to refresh the list here.
-                // Make sure you call swipeContainer.setRefreshing(false)
-                // once the network request has completed successfully.
                 fetchTimelineAsync(0);
             }
         });
@@ -81,9 +78,6 @@ public class TrendingFeedFragment extends Fragment {
     }
 
     public void fetchTimelineAsync(int page) {
-        // Send the network request to fetch the updated data
-        // `client` here is an instance of Android Async HTTP
-        // getHomeTimeline is an example endpoint.
         swipeContainer.setRefreshing(true);
         adapter.clear();
         queryTrending();
@@ -101,8 +95,7 @@ public class TrendingFeedFragment extends Fragment {
                         // Get jsonResults
                         jsonResults = response.jsonObject.getJSONArray("results");
                         // Parse json array into array of model objects
-                        // final ArrayList<Result> results = Result.fromJson(docs);
-                        // add five movies into the results array
+                        // add movies into the results array
                         int jsonResultsLength = jsonResults.length();
                         final ArrayList<Result> results;
                         if (jsonResultsLength > 0) {
@@ -144,15 +137,14 @@ public class TrendingFeedFragment extends Fragment {
                         // Get jsonResults
                         jsonResults = response.jsonObject.getJSONObject("tracks").getJSONArray("track");
                         // Parse json array into array of model objects
-                        // final ArrayList<Result> results = Result.fromJson(docs);
-                        // add five songs into the results array
+                        // add songs into the results array
                         int jsonResultsLength = jsonResults.length();
                         final ArrayList<Result> results;
                         if (jsonResultsLength > 0) {
                             if (jsonResultsLength > 4)
-                                results = new ArrayList<>(Result.fromJson(jsonResults, "Song").subList(0, 4));
+                                results = new ArrayList<>(Result.fromJson(jsonResults, "Trending Song").subList(0, 4));
                             else
-                                results = new ArrayList<>(Result.fromJson(jsonResults, "Song").subList(0, 1));
+                                results = new ArrayList<>(Result.fromJson(jsonResults, "Trending Song").subList(0, 1));
                             // Load model objects into the adapter
                             for (Result result : results) {
                                 allTrending.add(result); // add result through the adapter
@@ -189,8 +181,7 @@ public class TrendingFeedFragment extends Fragment {
                         jsonList1 = response.jsonObject.getJSONObject("results").getJSONArray("lists").getJSONObject(0).getJSONArray("books");
                         jsonList2 = response.jsonObject.getJSONObject("results").getJSONArray("lists").getJSONObject(1).getJSONArray("books");
                         // Parse json array into array of model objects
-                        // final ArrayList<Result> results = Result.fromJson(docs);
-                        // add five songs into the results array
+                        // add songs into the results array
                         int jsonListLength = jsonList1.length();
                         ArrayList<Result> results;
                         if (jsonListLength > 0) {
