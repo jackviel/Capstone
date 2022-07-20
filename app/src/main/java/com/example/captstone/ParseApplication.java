@@ -11,7 +11,7 @@ import androidx.room.Room;
 
 public class ParseApplication extends Application {
 
-    MyDatabase myDatabase;
+    private MyDatabase myDatabase;
 
     // Initializes Parse SDK as soon as the application is created
     @Override

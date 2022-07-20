@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectedMediaActivity extends AppCompatActivity {
-    public static final String TAG = "SelectedMediaActivity";
+    private static final String TAG = "SelectedMediaActivity";
 
     private TextView tvTitle;
     private TextView tvMediaType;

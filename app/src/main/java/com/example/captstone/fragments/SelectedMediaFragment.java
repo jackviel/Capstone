@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectedMediaFragment extends Fragment {
-    public static final String TAG = "SelectedMediaFragment";
+    private static final String TAG = "SelectedMediaFragment";
 
     private TextView tvTitle;
     private TextView tvMediaType;

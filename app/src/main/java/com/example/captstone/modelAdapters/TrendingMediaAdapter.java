@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrendingMediaAdapter extends RecyclerView.Adapter<TrendingMediaAdapter.ViewHolder> {
-
     private static final String TAG = "TrendingMediaAdapter";
 
     private List<Result> mResults;

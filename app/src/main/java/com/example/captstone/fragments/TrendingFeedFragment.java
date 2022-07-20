@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import okhttp3.Headers;
 
 public class TrendingFeedFragment extends Fragment {
-    public static final String TAG = "TrendingFragment";
+    private static final String TAG = "TrendingFragment";
 
     private RecyclerView rvTrending;
     private SwipeRefreshLayout swipeContainer;

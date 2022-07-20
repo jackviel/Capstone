@@ -17,7 +17,7 @@ import com.example.captstone.R;
 import com.parse.ParseUser;
 
 public class SettingsFragment extends Fragment {
-    public static final String TAG = "SettingsFragment";
+    private static final String TAG = "SettingsFragment";
 
     private Button bLogout;
     private Button bChangeUsername;

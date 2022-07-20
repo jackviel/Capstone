@@ -16,7 +16,7 @@ import com.example.captstone.viewPagerAdapters.TrendingViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class TrendingFragment extends Fragment {
-    public static final String TAG = "TrendingFragment";
+    private static final String TAG = "TrendingFragment";
 
     private TabLayout tabLayout;
     private ViewPager2 viewPager;

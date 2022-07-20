@@ -18,7 +18,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.parse.ParseUser;
 
 public class ProfileFragment extends Fragment {
-    public static final String TAG = "SettingsFragment";
+    private static final String TAG = "SettingsFragment";
 
     private ImageView ivProfilePic;
     private TextView tvUsername;

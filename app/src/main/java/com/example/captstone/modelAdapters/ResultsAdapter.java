@@ -28,8 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHolder> {
-
-    public static final String TAG = "ResultsAdapter";
+    private static final String TAG = "ResultsAdapter";
 
     private List<Result> mResults;
     private Context mContext;

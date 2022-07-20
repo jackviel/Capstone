@@ -15,7 +15,7 @@ import com.example.captstone.viewPagerAdapters.HomeViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class HomeFragment extends Fragment {
-    public static final String TAG = "HomeFragment";
+    private static final String TAG = "HomeFragment";
 
     TabLayout tabLayout;
     ViewPager2 viewPager;

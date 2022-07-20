@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyReviewsFragment extends Fragment {
-    public static final String TAG = "MyReviewsFragment";
+    private static final String TAG = "MyReviewsFragment";
 
     private RecyclerView rvReviews;
     private LinearLayoutManager manager;

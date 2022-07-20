@@ -38,9 +38,9 @@ import java.util.ArrayList;
 import okhttp3.Headers;
 
 public class MainActivity extends AppCompatActivity {
+    private final static String TAG = "MainActivity";
 
     private BottomNavigationView bottomNavigationView;
-    public final static String TAG = "MainActivity";
 
     private RecyclerView rvResults;
     private ProgressBar pbLoading;

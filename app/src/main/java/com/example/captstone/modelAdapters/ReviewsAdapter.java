@@ -29,11 +29,10 @@ import java.util.List;
 import java.util.Objects;
 
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHolder> {
+    private static final String TAG = "ReviewsAdapter";
 
     private Context context;
     private List<Review> reviews;
-
-    public static final String TAG = "ReviewsAdapter";
 
     public ReviewsAdapter(Context context, List<Review> reviews) {
         this.context = context;

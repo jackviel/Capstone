@@ -17,8 +17,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 public class LoginScreenActivity extends AppCompatActivity {
-
-    public static final String TAG = "LoginActivity";
+    private static final String TAG = "LoginActivity";
 
     private EditText etUsername;
     private EditText etpPassword;

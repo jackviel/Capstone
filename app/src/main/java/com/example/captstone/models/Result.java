@@ -13,11 +13,12 @@ import java.util.Objects;
 
 @Parcel
 public final class Result {
+    private static final String TAG = "ResultModel";
+
     private String openLibraryId;
     private String creator;
     private String title;
     private String mediaType;
-    public static final String TAG = "ResultModel";
 
     public String getOpenLibraryId() {
         return openLibraryId;

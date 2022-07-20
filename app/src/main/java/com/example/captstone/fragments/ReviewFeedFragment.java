@@ -37,8 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewFeedFragment extends Fragment {
-
-    public static final String TAG = "FeedFragment";
+    private static final String TAG = "FeedFragment";
 
     private ReviewDao reviewDao;
     private RecyclerView rvReviews;
@@ -115,7 +114,7 @@ public class ReviewFeedFragment extends Fragment {
     }
 
     private void queryReviews() {
-        if (isNetworkAvailable()) {
+        if (isNetworkAvailable()) { // if network is available, query parse for reviews
             ParseQuery<Review> query = ParseQuery.getQuery(Review.class);
             query.include(Review.KEY_USER);
             query.addDescendingOrder("createdAt");

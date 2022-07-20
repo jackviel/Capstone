@@ -15,7 +15,7 @@ import com.example.captstone.viewPagerAdapters.HomeViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class ChangeProfilePicFragment extends Fragment {
-    public static final String TAG = "ChangeProfilePicFragment";
+    private static final String TAG = "ChangeProfilePicFragment";
 
     TabLayout tabLayout;
     ViewPager2 viewPager;
