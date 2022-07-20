@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -75,6 +76,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
         private TextView tvReviewTitle;
         private TextView tvMediaTitle;
         private TextView tvMediaType;
+        private RatingBar rbRating;
         private ImageView ivProfilePic;
         private Button bAddToList;
 
@@ -85,6 +87,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
 //            tvReviewBody = itemView.findViewById(R.id.tvReviewBody);
             tvMediaTitle = itemView.findViewById(R.id.tvMediaTitle);
             tvMediaType = itemView.findViewById(R.id.tvMediaType);
+            rbRating = itemView.findViewById(R.id.rbRating);
             tvTimeAgo = itemView.findViewById(R.id.tvTimeAgo);
             ivProfilePic = itemView.findViewById(R.id.ivProfilePic);
             bAddToList = itemView.findViewById(R.id.bAddToList);
@@ -98,6 +101,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
 //            tvReviewTitle.setText(review.getReviewTitle());
             tvMediaTitle.setText(review.getMediaTitle());
             tvMediaType.setText(review.getMediaType());
+            rbRating.setRating(review.getReviewRating());
 
             //Set the time ago text
             DateFormat df = new SimpleDateFormat("MMMM dd");

@@ -14,6 +14,7 @@ public class Review extends ParseObject {
     public static final String KEY_MEDIA_CREATOR = "mediaCreator";
     public static final String KEY_REVIEW_TITLE = "reviewTitle";
     public static final String KEY_REVIEW_BODY = "reviewBody";
+    private static final String KEY_REVIEW_RATING = "reviewRating";
 
     public Review(String reviewTitle, String reviewBody, String user, String createdAt, String mediaType, String mediaTitle, String mediaCreator) {
         put(KEY_REVIEW_TITLE, reviewTitle);
@@ -87,5 +88,12 @@ public class Review extends ParseObject {
 
     public void setCreatedAt(String createdAt) {
         put(KEY_CREATED_AT, createdAt);
+    }
+
+    public float getReviewRating() {
+        return getNumber(KEY_REVIEW_RATING).floatValue();
+    }
+    public void setReviewRating(float reviewRating) {
+        put(KEY_REVIEW_RATING, reviewRating);
     }
 }

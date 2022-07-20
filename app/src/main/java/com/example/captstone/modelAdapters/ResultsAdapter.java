@@ -3,7 +3,6 @@ package com.example.captstone.modelAdapters;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.captstone.MainActivity;
 import com.example.captstone.R;
 import com.example.captstone.SelectedMediaActivity;
-import com.example.captstone.fragments.SelectedMediaFragment;
 import com.example.captstone.models.Result;
 
 import org.parceler.Parcels;

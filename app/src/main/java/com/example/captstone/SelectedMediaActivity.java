@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class SelectedMediaActivity extends AppCompatActivity {
     private Button bSubmitReview;
     private ProgressBar pbLoading;
     private EditText etReviewBody;
+    private RatingBar rbRating;
     private MaterialCardView mcvAddReview;
     private RecyclerView rvReviews;
     private LinearLayoutManager manager;
@@ -68,6 +70,7 @@ public class SelectedMediaActivity extends AppCompatActivity {
         bSubmitReview = findViewById(R.id.bSubmitReview);
         pbLoading = findViewById(R.id.pbLoading);
         etReviewBody = findViewById(R.id.etReviewBody);
+        rbRating = findViewById(R.id.rbRating);
         mcvAddReview = findViewById(R.id.mcvAddReview);
         rvReviews = findViewById(R.id.rvReviews);
 
@@ -119,7 +122,7 @@ public class SelectedMediaActivity extends AppCompatActivity {
                     return;
                 }
                 // save review
-                saveReview(reviewBody, ParseUser.getCurrentUser(), mediaType, mediaTitle, mediaCreator);
+                saveReview(reviewBody, ParseUser.getCurrentUser(), mediaType, mediaTitle, mediaCreator, rbRating.getRating());
 
             }
         });
@@ -165,7 +168,7 @@ public class SelectedMediaActivity extends AppCompatActivity {
         });
     }
 
-    private void saveReview(String reviewBody, ParseUser currentUser, String mediaType, String mediaTitle, String mediaCreator) {
+    private void saveReview(String reviewBody, ParseUser currentUser, String mediaType, String mediaTitle, String mediaCreator, float reviewRating) {
         Review review = new Review();
         review.setReviewTitle("");
         review.setReviewBody(reviewBody);
@@ -173,6 +176,7 @@ public class SelectedMediaActivity extends AppCompatActivity {
         review.setMediaType(mediaType);
         review.setMediaTitle(mediaTitle);
         review.setMediaCreator(mediaCreator);
+        review.setReviewRating(reviewRating);
         pbLoading.setVisibility(ProgressBar.VISIBLE);
         review.saveInBackground(new SaveCallback() {
             @Override

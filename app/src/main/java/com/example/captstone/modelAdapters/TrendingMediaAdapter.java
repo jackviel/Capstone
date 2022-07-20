@@ -13,10 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.captstone.MainActivity;
 import com.example.captstone.R;
 import com.example.captstone.SelectedMediaActivity;
-import com.example.captstone.fragments.SelectedMediaFragment;
 import com.example.captstone.models.Result;
 
 import org.parceler.Parcels;
@@ -78,12 +76,8 @@ public class TrendingMediaAdapter extends RecyclerView.Adapter<TrendingMediaAdap
                     if (position != RecyclerView.NO_POSITION) {
                         // get the movie at the position clicked
                         Result result = mResults.get(position);
-                        // launch selected media fragment
-                        SelectedMediaFragment selectedMediaFragment = new SelectedMediaFragment();
-                        // pass the movie to the fragment
                         Bundle args = new Bundle();
                         args.putParcelable("result", Parcels.wrap(result));
-                        selectedMediaFragment.setArguments(args);
                         // launch the SelectedMediaActivity
                         Intent intent = new Intent(mContext, SelectedMediaActivity.class);
                         intent.putExtra("result", Parcels.wrap(result));
