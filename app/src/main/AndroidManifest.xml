@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Captstone"
         tools:targetApi="31">
         <activity
+            android:name=".ChangeUsernameActivity"
+            android:exported="false" />
+        <activity
             android:name=".SelectedMediaActivity"
             android:exported="false" />
         <activity

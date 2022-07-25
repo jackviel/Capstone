@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.captstone.ChangeUsernameActivity;
 import com.example.captstone.LoginScreenActivity;
 import com.example.captstone.R;
 import com.parse.ParseUser;
@@ -42,6 +43,12 @@ public class SettingsFragment extends Fragment {
             Log.i(TAG, "onClick Logout button " + ParseUser.getCurrentUser());
             ParseUser.logOut();
             Intent i = new Intent(getContext(), LoginScreenActivity.class);
+            startActivity(i);
+        });
+
+        bChangeUsername.setOnClickListener(v -> {
+            Log.i(TAG, "onClick Change Username button " + ParseUser.getCurrentUser());
+            Intent i = new Intent(getContext(), ChangeUsernameActivity.class);
             startActivity(i);
         });
 
