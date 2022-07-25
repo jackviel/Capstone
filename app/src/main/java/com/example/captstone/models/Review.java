@@ -12,18 +12,17 @@ public class Review extends ParseObject {
     public static final String KEY_MEDIA_TYPE = "mediaType";
     public static final String KEY_MEDIA_TITLE = "mediaTitle";
     public static final String KEY_MEDIA_CREATOR = "mediaCreator";
-    public static final String KEY_REVIEW_TITLE = "reviewTitle";
     public static final String KEY_REVIEW_BODY = "reviewBody";
     private static final String KEY_REVIEW_RATING = "reviewRating";
 
-    public Review(String reviewTitle, String reviewBody, String user, String createdAt, String mediaType, String mediaTitle, String mediaCreator) {
-        put(KEY_REVIEW_TITLE, reviewTitle);
+    public Review(String reviewBody, String user, String createdAt, String mediaType, String mediaTitle, String mediaCreator, float reviewRating) {
         put(KEY_REVIEW_BODY, reviewBody);
         put(KEY_USER, user);
         put(KEY_CREATED_AT, createdAt);
         put(KEY_MEDIA_TYPE, mediaType);
         put(KEY_MEDIA_TITLE, mediaTitle);
         put(KEY_MEDIA_CREATOR, mediaCreator);
+        put(KEY_REVIEW_RATING, reviewRating);
     }
 
     public Review() {
@@ -76,14 +75,6 @@ public class Review extends ParseObject {
 
     public void setMediaCreator(String mediaCreator){
         put(KEY_MEDIA_CREATOR, mediaCreator);
-    }
-
-    public String getReviewTitle(){
-        return getString(KEY_REVIEW_TITLE);
-    }
-
-    public void setReviewTitle(String reviewTitle){
-        put(KEY_REVIEW_TITLE, reviewTitle);
     }
 
     public void setCreatedAt(String createdAt) {

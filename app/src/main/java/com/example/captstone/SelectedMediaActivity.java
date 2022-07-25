@@ -170,7 +170,6 @@ public class SelectedMediaActivity extends AppCompatActivity {
 
     private void saveReview(String reviewBody, ParseUser currentUser, String mediaType, String mediaTitle, String mediaCreator, float reviewRating) {
         Review review = new Review();
-        review.setReviewTitle("");
         review.setReviewBody(reviewBody);
         review.setUser(currentUser);
         review.setMediaType(mediaType);

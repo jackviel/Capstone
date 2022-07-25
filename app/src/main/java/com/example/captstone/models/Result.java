@@ -111,6 +111,14 @@ public final class Result {
         return result;
     }
 
+   public static Result fromReview(Review review) {
+        Result result = new Result();
+        result.title = review.getMediaTitle();
+        result.creator = review.getMediaCreator();
+        result.mediaType = review.getMediaType();
+        return result;
+    }
+
     // Return comma separated author list when there is more than one author
     private static String getAuthor(final JSONObject jsonObject) {
         try {

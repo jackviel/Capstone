@@ -115,6 +115,7 @@ public class ReviewFeedFragment extends Fragment {
 
     private void queryReviews() {
         if (isNetworkAvailable()) { // if network is available, query parse for reviews
+            // TODO: check if we got a response from Parse
             ParseQuery<Review> query = ParseQuery.getQuery(Review.class);
             query.include(Review.KEY_USER);
             query.addDescendingOrder("createdAt");

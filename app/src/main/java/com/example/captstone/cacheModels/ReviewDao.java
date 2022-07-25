@@ -9,7 +9,7 @@ import java.util.List;
 
 @Dao
 public interface ReviewDao {
-    @Query("SELECT * FROM ReviewCache LIMIT 25")
+    @Query("SELECT * FROM ReviewCache ORDER BY createdAt LIMIT 25")
     List<ReviewCache> recentItems();
 
     @Insert (onConflict = OnConflictStrategy.REPLACE)

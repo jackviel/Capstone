@@ -100,7 +100,6 @@
             android:layout_marginLeft="310dp"
             android:layout_marginTop="425dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/add_icon_material"
             tools:src="@drawable/add_icon_material"
             tools:srcCompat="@drawable/add_icon_material" />
 

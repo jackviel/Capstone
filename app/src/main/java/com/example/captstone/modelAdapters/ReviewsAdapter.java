@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.captstone.R;
+import com.example.captstone.models.Result;
 import com.example.captstone.models.Review;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -26,6 +28,7 @@ import com.parse.SaveCallback;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,6 +37,8 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
 
     private Context context;
     private List<Review> reviews;
+    private HashSet<String> myList;
+    private ArrayList<String> userMediaList;
 
     public ReviewsAdapter(Context context, List<Review> reviews) {
         this.context = context;
@@ -73,17 +78,16 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
         private TextView tvUsername;
         private TextView tvReviewBody;
         private TextView tvTimeAgo;
-        private TextView tvReviewTitle;
         private TextView tvMediaTitle;
         private TextView tvMediaType;
         private RatingBar rbRating;
         private ImageView ivProfilePic;
         private Button bAddToList;
+        private ImageButton ibAddToList;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvUsername = itemView.findViewById(R.id.tvUsername);
-//            tvReviewTitle = itemView.findViewById(R.id.tvReviewTitle);
 //            tvReviewBody = itemView.findViewById(R.id.tvReviewBody);
             tvMediaTitle = itemView.findViewById(R.id.tvMediaTitle);
             tvMediaType = itemView.findViewById(R.id.tvMediaType);
@@ -91,6 +95,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
             tvTimeAgo = itemView.findViewById(R.id.tvTimeAgo);
             ivProfilePic = itemView.findViewById(R.id.ivProfilePic);
             bAddToList = itemView.findViewById(R.id.bAddToList);
+            ibAddToList = itemView.findViewById(R.id.ibAddToList);
         }
 
 
@@ -98,10 +103,26 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
             //Bind the review data to the view elements
             tvUsername.setText(review.getUser().getUsername());
 //            tvReviewBody.setText(review.getReviewBody());
-//            tvReviewTitle.setText(review.getReviewTitle());
             tvMediaTitle.setText(review.getMediaTitle());
             tvMediaType.setText(review.getMediaType());
             rbRating.setRating(review.getReviewRating());
+
+            ParseUser currentUser = ParseUser.getCurrentUser();
+            myList = new HashSet<String>();
+            userMediaList = new ArrayList<>(Objects.requireNonNull(currentUser.getList("userMediaList")));
+
+            for (Review curReview : reviews) {
+                if (userMediaList.contains(curReview.getObjectId())) {
+                    myList.add(curReview.getMediaTitle());
+                }
+            }
+
+            if (myList.contains(review.getMediaTitle())) {
+                ibAddToList.setBackgroundResource(R.drawable.check_icon_material);
+            } else {
+                ibAddToList.setBackgroundResource(R.drawable.add_icon_material);
+            }
+
 
             //Set the time ago text
             DateFormat df = new SimpleDateFormat("MMMM dd");
@@ -115,10 +136,6 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
             } else {
                 Glide.with(context).load(R.drawable.default_profile_pic).into(ivProfilePic);
             }
-
-            ParseUser currentUser = ParseUser.getCurrentUser();
-
-            ArrayList<String> userMediaList = new ArrayList(Objects.requireNonNull(currentUser.getList("userMediaList")));
 
             // double tap add to user's list
             bAddToList.setOnTouchListener(new View.OnTouchListener() {
@@ -145,6 +162,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
                                         Log.e(TAG, "Error while saving", e);
                                     }
                                     Log.i(TAG, "Current User save was successful.");
+                                    ibAddToList.setBackgroundResource(R.drawable.check_icon_material);
                                 }
                             });
                         }
@@ -157,6 +175,34 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
                 public boolean onTouch(View v, MotionEvent event) {
                     gestureDetector.onTouchEvent(event);
                     return false;
+                }
+            });
+            ibAddToList.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String reviewId = review.getObjectId();
+                    // add media review to list
+                    if (!userMediaList.contains(reviewId)) {
+                        userMediaList.add(review.getObjectId());
+                        // refresh current ParseUser
+                        currentUser.fetchInBackground();
+                        // put new array with the new list entry
+                        currentUser.put("userMediaList", userMediaList);
+                        Log.i(TAG, "CurrentUser's updated list: " + userMediaList);
+                        // save changes into parse
+                        currentUser.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e != null) {
+                                    Log.e(TAG, "Error while saving", e);
+                                }
+                                Log.i(TAG, "Current User save was successful.");
+                                ibAddToList.setBackgroundResource(R.drawable.check_icon_material);
+                            }
+                        });
+                    }
+                    else
+                        Log.i(TAG, "Media already on list!, nothing changed.");
                 }
             });
         }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.captstone.fragments.MyListFragment;
 import com.example.captstone.fragments.MyReviewsFragment;
 import com.example.captstone.fragments.SettingsFragment;
 
@@ -20,11 +21,11 @@ public class ProfileViewPagerAdapter extends FragmentStateAdapter {
             case 0:
                 return new MyReviewsFragment();
             case 1:
-                return new SettingsFragment();
+                return new MyListFragment();
             case 2:
                 return new SettingsFragment();
             default:
-                return new SettingsFragment();
+                return new MyReviewsFragment();
         }
     }
 
