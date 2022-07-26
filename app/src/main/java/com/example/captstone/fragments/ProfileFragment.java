@@ -12,9 +12,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bumptech.glide.Glide;
 import com.example.captstone.viewPagerAdapters.ProfileViewPagerAdapter;
 import com.example.captstone.R;
 import com.google.android.material.tabs.TabLayout;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 
 public class ProfileFragment extends Fragment {
@@ -40,12 +42,18 @@ public class ProfileFragment extends Fragment {
 
         ivProfilePic = view.findViewById(R.id.ivProfilePic);
         tvUsername = view.findViewById(R.id.tvUsername);
-
         tabLayout = view.findViewById(R.id.tabLayout);
         viewPager = view.findViewById(R.id.viewPager);
         adapter = new ProfileViewPagerAdapter(this);
         viewPager.setUserInputEnabled(false);
         viewPager.setAdapter(adapter);
+
+        ParseFile profilePic = ParseUser.getCurrentUser().getParseFile("profilePic");
+        if (profilePic != null) {
+            Glide.with(this).load(profilePic.getUrl()).into(ivProfilePic);
+        } else {
+            Glide.with(this).load(R.drawable.default_profile_pic).into(ivProfilePic);
+        }
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
