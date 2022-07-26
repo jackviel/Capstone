@@ -3,15 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ChangeUsernameActivity">
 
-    <Button
-        android:id="@+id/bLogout"
+    <EditText
+        android:id="@+id/etUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="156dp"
-        android:text="Logout"
+        android:layout_marginTop="244dp"
+        android:layout_marginEnd="100dp"
+        android:ems="10"
+        android:hint="New Username"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -19,19 +22,9 @@
         android:id="@+id/bChangeUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
         android:layout_marginEnd="120dp"
         android:text="Change Username"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bLogout" />
-
-    <Button
-        android:id="@+id/bChangeProfilePic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="108dp"
-        android:text="Change Profile Picture"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bChangeUsername" />
-
+        app:layout_constraintTop_toBottomOf="@+id/etUsername" />
 </androidx.constraintlayout.widget.ConstraintLayout>

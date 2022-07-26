@@ -5,22 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.captstone.fragments.ComposeFragment;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 public class LoginScreenActivity extends AppCompatActivity {
-
-    public static final String TAG = "LoginActivity";
+    private static final String TAG = "LoginActivity";
 
     private EditText etUsername;
     private EditText etpPassword;
@@ -33,7 +30,7 @@ public class LoginScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("Working Title :-)");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         if (ParseUser.getCurrentUser() != null){

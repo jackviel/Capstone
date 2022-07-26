@@ -93,16 +93,6 @@
             android:layout_marginTop="495dp"
             android:isIndicator="true"/>
 
-        <ImageButton
-            android:id="@+id/ibAddToList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="310dp"
-            android:layout_marginTop="425dp"
-            android:background="@android:color/transparent"
-            tools:src="@drawable/add_icon_material"
-            tools:srcCompat="@drawable/add_icon_material" />
-
 
     </com.google.android.material.card.MaterialCardView>
 

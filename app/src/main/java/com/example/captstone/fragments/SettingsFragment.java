@@ -2,34 +2,28 @@ package com.example.captstone.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.example.captstone.ChangeUsernameActivity;
 import com.example.captstone.LoginScreenActivity;
 import com.example.captstone.R;
-import com.example.captstone.models.Review;
-import com.parse.ParseException;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 public class SettingsFragment extends Fragment {
-
-    public static final String TAG = "SettingsFragment";
+    private static final String TAG = "SettingsFragment";
 
     private Button bLogout;
     private Button bChangeUsername;
-    
+    private Button bChangeProfilePic;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,11 +37,18 @@ public class SettingsFragment extends Fragment {
 
         bLogout = view.findViewById(R.id.bLogout);
         bChangeUsername = view.findViewById(R.id.bChangeUsername);
+        bChangeProfilePic = view.findViewById(R.id.bChangeProfilePic);
 
         bLogout.setOnClickListener(v -> {
             Log.i(TAG, "onClick Logout button " + ParseUser.getCurrentUser());
             ParseUser.logOut();
             Intent i = new Intent(getContext(), LoginScreenActivity.class);
+            startActivity(i);
+        });
+
+        bChangeUsername.setOnClickListener(v -> {
+            Log.i(TAG, "onClick Change Username button " + ParseUser.getCurrentUser());
+            Intent i = new Intent(getContext(), ChangeUsernameActivity.class);
             startActivity(i);
         });
 

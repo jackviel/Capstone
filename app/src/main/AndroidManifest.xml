@@ -18,8 +18,15 @@
         android:theme="@style/Theme.Captstone"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ChangeUsernameActivity"
             android:exported="false" />
+        <activity
+            android:name=".SelectedMediaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".LoginScreenActivity"
             android:exported="true">
