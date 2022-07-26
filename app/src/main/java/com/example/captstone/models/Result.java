@@ -107,6 +107,10 @@ public final class Result {
                 return null;
             }
         }
+        else {
+            Log.e(TAG, "Unknown media type");
+            return null;
+        }
         // Return new object
         return result;
     }
